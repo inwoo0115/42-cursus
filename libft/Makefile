@@ -6,7 +6,7 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 15:49:39 by wonjilee          #+#    #+#              #
-#    Updated: 2022/11/22 18:46:04 by wonjilee         ###   ########.fr        #
+#    Updated: 2022/11/22 23:39:39 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,10 @@ OBJS = $(SRCS:.c=.o)
 
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
+OBJS_USE = $(OBJS)
+
+bonus : OBJS_USE := $(OBJS) $(OBJS_BONUS)
+
 all : $(NAME)
 
 %.o : %.c
@@ -44,10 +48,9 @@ fclean : clean
 
 re : fclean all
 
-$(NAME): $(OBJS)
-		ar crs $@ $^
+bonus : $(NAME)
 
-bonus : $(OBJS) $(OBJS_BONUS)
-		ar crs $(NAME) $^
+$(NAME): $(OBJS_USE)
+		ar crs $@ $(OBJS_USE)
 
 .PHONY: all clean fclean re bonus

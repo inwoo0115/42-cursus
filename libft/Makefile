@@ -6,11 +6,11 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 15:49:39 by wonjilee          #+#    #+#              #
-#    Updated: 2022/11/22 23:39:39 by wonjilee         ###   ########.fr        #
+#    Updated: 2022/11/23 02:49:04 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME := libft.a
 
 CC = gcc
 CFLAG = -Wall -Wextra -Werror
@@ -31,11 +31,13 @@ OBJS = $(SRCS:.c=.o)
 
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
-OBJS_USE = $(OBJS)
-
-bonus : OBJS_USE := $(OBJS) $(OBJS_BONUS)
+define OBJECT_USE
+$(OBJS) $(if $(filter bonus, $(MAKECMDGOALS)),$(OBJS_BONUS))
+endef
 
 all : $(NAME)
+
+bonus : $(NAME)
 
 %.o : %.c
 		$(CC) $(CFLAG) -c $< -o $@
@@ -46,11 +48,11 @@ clean :
 fclean : clean
 		rm -f $(NAME)
 
-re : fclean all
+re : 
+		make fclean 
+		make all
 
-bonus : $(NAME)
-
-$(NAME): $(OBJS_USE)
-		ar crs $@ $(OBJS_USE)
+$(NAME): $(call OBJECT_USE)
+		ar crsu $@ $?
 
 .PHONY: all clean fclean re bonus

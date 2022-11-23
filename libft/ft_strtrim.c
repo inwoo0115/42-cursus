@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:03:21 by wonjilee          #+#    #+#             */
-/*   Updated: 2022/11/22 16:53:14 by wonjilee         ###   ########.fr       */
+/*   Updated: 2022/11/24 00:27:43 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static size_t	front_set(char const *s1, char const *set)
 		flag = 1;
 		while (set[j])
 		{
-			if (s1[i] == set[j])
+			if (s1[i] == set[j] && flag == 1)
 			{
 				flag = 0;
 				num++;
@@ -56,7 +56,7 @@ static size_t	back_set(char const *s1, char const *set)
 		flag = 1;
 		while (set[j])
 		{
-			if (s1[i] == set[j])
+			if (s1[i] == set[j] && flag == 1)
 			{
 				flag = 0;
 				num++;

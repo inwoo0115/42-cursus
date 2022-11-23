@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:52:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2022/11/22 16:25:02 by wonjilee         ###   ########.fr       */
+/*   Updated: 2022/11/23 23:35:20 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
-		num = num * 10 + (str[i++] - '0');
-	return (pm * num);
+		num = num * 10 + pm * (str[i++] - '0');
+	return (num);
 }

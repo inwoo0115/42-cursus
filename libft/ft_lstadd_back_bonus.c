@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 02:16:17 by wonjilee          #+#    #+#             */
-/*   Updated: 2022/11/22 17:07:25 by wonjilee         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:53:54 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,4 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	(*lst)->next = new;
 	*lst = temp;
 }
+

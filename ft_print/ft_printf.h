@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonjin <wonjilee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:23:31 by wonjin            #+#    #+#             */
-/*   Updated: 2022/12/05 17:10:23 by wonjin           ###   ########.fr       */
+/*   Updated: 2022/12/05 21:31:00 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_PRINTF_H
 # include <unistd.h>
 # include <stdarg.h>
+# include <stdlib.h>
 
 enum e_convert { PLAIN, CHAR, STR, PTR, SDEC, UDEC, LHEX, UHEX, PCENT };
 

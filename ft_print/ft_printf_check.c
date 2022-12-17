@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_printf_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 00:45:31 by wonjilee          #+#    #+#             */
-/*   Updated: 2022/12/17 21:40:09 by wonjilee         ###   ########.fr       */
+/*   Created: 2022/12/05 21:15:05 by wonjilee          #+#    #+#             */
+/*   Updated: 2022/12/05 21:30:56 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# include <unistd.h>
+#include "ft_printf.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
-# endif
-
-typedef struct s_line
+int	check_flags(t_convert *new_convert, char **locate)
 {
-	char	buff[BUFFER_SIZE + 1];
-	char	*save;
-	int		index;
-	int		len;
-}	t_line;
+	int	result;
 
-char	*get_next_line(int fd);
-char	*make_line(char *str, t_line newstr, int i, int j);
-size_t	ft_strlen(char *s);
+	(*locate)++;
+}
 
-#endif
+int	check_width(t_convert *new_convert, char **locate)
+{
+	
+}
+
+int	check_precision(t_convert *new_convert, char **locate)
+{
+	
+}

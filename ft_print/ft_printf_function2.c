@@ -1,34 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_printf_function2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 00:45:31 by wonjilee          #+#    #+#             */
-/*   Updated: 2022/12/17 21:40:09 by wonjilee         ###   ########.fr       */
+/*   Created: 2022/12/05 21:05:56 by wonjilee          #+#    #+#             */
+/*   Updated: 2022/12/05 21:30:52 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# include <unistd.h>
+#include "ft_printf.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
-# endif
-
-typedef struct s_line
+int	print_plain(t_convert *text)
 {
-	char	buff[BUFFER_SIZE + 1];
-	char	*save;
-	int		index;
-	int		len;
-}	t_line;
+}
 
-char	*get_next_line(int fd);
-char	*make_line(char *str, t_line newstr, int i, int j);
-size_t	ft_strlen(char *s);
+int	print_char(t_convert *text, char c)
+{
+}
 
-#endif
+int	print_str(t_convert *text, char *str)
+{
+}
+
+int	print_sdec(t_convert *text, int num)
+{
+}
+
+int	print_udec(t_convert *text, int num)
+{
+}
+
+int	print_lhex(t_convert *text, int num)
+{
+}
+
+int	print_udex(t_convert *text, int num)
+{
+}
+
+int	print_pcent(t_convert *text)
+{
+}
+

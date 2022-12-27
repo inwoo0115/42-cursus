@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 00:44:09 by wonjilee          #+#    #+#             */
-/*   Updated: 2022/12/27 21:08:59 by wonjilee         ###   ########.fr       */
+/*   Updated: 2022/12/27 22:58:29 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	next_line(char *str, t_line *data)
 	}
 }
 
-char	*make_line(char *str, char *buff, t_line *data)
+char	*make_line(char *str, t_line *data)
 {
 	char	*new;
 	int		i;
@@ -41,7 +41,7 @@ char	*make_line(char *str, char *buff, t_line *data)
 	j = 0;
 	new = (char *)malloc(data->index + 2);
 	if (new == 0)
-		return (0);
+		return (free_res(str));
 	while (i <= data->index)
 	{
 		new[i] = str[i];
@@ -56,52 +56,42 @@ char	*make_line(char *str, char *buff, t_line *data)
 	}
 	data->save[j] = '\0';
 	free(str);
-	free(buff);
 	return (new);
+}
+
+char	*free_res(char *str)
+{
+	free(str);
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
 {
-	static t_line	data = {"\0", -1, 0};
+	static t_line	data = {"\0", "\0", -1, 0};
 	char			*str;
-	char			*buff;
 
-	buff = (char *)malloc(BUFFER_SIZE + 1);
-	if (fd < 0 || read(fd, buff, 0) < 0)
-	{
-		free(buff);
-		return (0);
-	}
 	str = ft_strdup(data.save);
+	if (check_read(fd, &data) || str == 0)
+		return (free_res(str));
 	if (next_line(str, &data))
-		return (make_line(str, buff, &data));
-	data.len = read(fd, buff, BUFFER_SIZE);
-	if (data.len <= 0)
-	{
-		free(buff);
-		if (ft_strlen(str))
-			return (str);
-		else
-			free(str);
-		return (0);
-	}
-	buff[data.len] = '\0';
+		return (make_line(str, &data));
+	data.len = read(fd, data.buff, BUFFER_SIZE);
 	while (data.len > 0)
 	{
-		str = ft_strjoin(str, buff);
+		data.buff[data.len] = '\0';
+		str = ft_strjoin(str, data.buff);
 		if (str == 0)
-		{
-			free(str);
-			free(buff);
 			return (0);
-		}
 		if (next_line(str, &data))
-			return (make_line(str, buff, &data));
-		data.len = read(fd, buff, BUFFER_SIZE);
-		buff[data.len] = '\0';
+			return (make_line(str, &data));
+		data.len = read(fd, data.buff, BUFFER_SIZE);
 	}
-	free(buff);
-	return (str);
+	if (ft_strlen(str))
+	{
+		data.save[0] = '\0';
+		return (str);
+	}
+	return (free_res(str));
 }
 /*
 #include <fcntl.h>

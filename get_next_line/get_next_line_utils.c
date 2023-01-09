@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/17 16:38:09 by wonjilee          #+#    #+#             */
-/*   Updated: 2022/12/28 16:47:31 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/01/09 15:07:10 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/01/09 19:39:24 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,43 +34,26 @@ char	*ft_strjoin(char *s1, char *s2)
 	len = ft_strlen(s1) + ft_strlen(s2);
 	newstr = (char *)malloc(len + 1);
 	if (newstr == 0)
-		return (free_res(s1));
+		return (0);
 	while (s1[j])
 		newstr[i++] = s1[j++];
 	j = 0;
 	while (s2[j])
 		newstr[i++] = s2[j++];
 	newstr[i] = '\0';
-	free(s1);
 	return (newstr);
 }
 
-int	check_read(int fd, t_line *data)
+int	check_newline(char *data)
 {
-	if (fd < 0 || read(fd, data->buff, 0) < 0)
-	{
-		data->save[0] = '\0';
-		data->buff[0] = '\0';
-		return (1);
-	}
-	else
-		return (0);
-}
+	int	i;
 
-char	*ft_strdup(char *s1)
-{
-	char		*s2;
-	int			i;
-
-	s2 = (char *)malloc(ft_strlen(s1) + 1);
-	if (!(s2))
-		return (free_res(s2));
 	i = 0;
-	while (s1[i])
+	while (data[i])
 	{
-		s2[i] = s1[i];
+		if (data[i] == '\n')
+			return (1);
 		i++;
 	}
-	s2[i] = '\0';
-	return (s2);
+	return (0);
 }

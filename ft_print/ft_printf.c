@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:23:10 by wonjin            #+#    #+#             */
-/*   Updated: 2022/12/05 21:30:58 by wonjilee         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:16:43 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	add_convert(t_list **converts, t_convert *new_convert)
 	t_list	*new_locate;
 
 	new_locate = (t_list *)malloc(sizeof(t_list));
-	if (new_locate == 0);
+	if (new_locate == 0)
 		return (0);
 	new_locate->convert = new_convert;
 	ft_lstadd_back(converts, new_locate);
@@ -28,21 +28,19 @@ int	check_conversion(t_list **converts, char **locate)
 {
 	t_convert	*new_convert;
 	char		*start;
-	int			check;
+	int			flag;
 
-	check = 1;
-	new_convert = create_convert();
-	if (new_convert == 0)
-		return (0);
 	start = *locate;
-	//check = check_flags(new_convert, locate);
-	//check = check_width(new_convert, locate);
-	//check = check_precision(new_convert, locate);
-	if (check == 0)
+	flag = check_flags(locate);
+	if (flag >= 0)
 	{
-		free(new_convert);
-		return (check);
+		new_convert = create_convert();
+		if (new_convert == 0)
+			return (0);
 	}
+	else
+		return (0);
+	new_convert->index = flag;
 	new_convert->start = start;
 	new_convert->end = locate;
 	return (add_convert(converts, new_convert));
@@ -58,9 +56,9 @@ int	check_format(t_list **converts, const char *format)
 	{
 		if (*locate == '%')
 		{
-			if (check_conversion(converts, &locate) == 0)
+			if (!(check_conversion(converts, &locate)))
 				return (-1);
-
+			locate++;
 		}
 		else
 		{

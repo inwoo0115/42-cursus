@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/17 16:38:09 by wonjilee          #+#    #+#             */
-/*   Updated: 2022/12/28 16:47:31 by wonjilee         ###   ########.fr       */
+/*   Created: 2022/12/27 21:16:27 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/01/09 12:34:41 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *s)
 {
@@ -34,7 +34,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	len = ft_strlen(s1) + ft_strlen(s2);
 	newstr = (char *)malloc(len + 1);
 	if (newstr == 0)
-		return (free_res(s1));
+	{
+		free(s1);
+		return (0);
+	}
 	while (s1[j])
 		newstr[i++] = s1[j++];
 	j = 0;
@@ -45,30 +48,20 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (newstr);
 }
 
-int	check_read(int fd, t_line *data)
-{
-	if (fd < 0 || read(fd, data->buff, 0) < 0)
-	{
-		data->save[0] = '\0';
-		data->buff[0] = '\0';
-		return (1);
-	}
-	else
-		return (0);
-}
-
-char	*ft_strdup(char *s1)
+char	*ft_strdup(int fd, char data[][BUFFER_SIZE + 1])
 {
 	char		*s2;
 	int			i;
 
-	s2 = (char *)malloc(ft_strlen(s1) + 1);
+	if (fd < 0)
+		return (0);
+	s2 = (char *)malloc(ft_strlen(data[fd]) + 1);
 	if (!(s2))
-		return (free_res(s2));
+		return (0);
 	i = 0;
-	while (s1[i])
+	while (data[fd][i])
 	{
-		s2[i] = s1[i];
+		s2[i] = data[fd][i];
 		i++;
 	}
 	s2[i] = '\0';

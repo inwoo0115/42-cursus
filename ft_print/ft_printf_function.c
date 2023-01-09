@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 19:01:40 by wonjilee          #+#    #+#             */
-/*   Updated: 2022/12/05 21:30:54 by wonjilee         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:15:32 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	*lst = temp;
 }
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear(t_list **lst)
 {
 	t_list	*temp;
 
@@ -49,19 +49,10 @@ t_convert	*create_convert(void)
 
 	new_convert = (t_convert *)malloc(sizeof(t_convert));
 	if (new_convert == 0)
-		return ;
+		return (0);
 	new_convert->index = 0;
 	new_convert->start = 0;
 	new_convert->end = 0;
-	new_convert->width = 0;
-	new_convert->precision = 0;
-	new_convert->u_width = 0;
-	new_convert->u_zero = 0;
-	new_convert->u_precision = 0;
-	new_convert->u_alt = 0;
-	new_convert->u_blank = 0;
-	new_convert->u_plus = 0;
-
 	return (new_convert);
 }
 
@@ -79,7 +70,7 @@ int	add_plain(t_list **converts, char *temp, char *locate)
 	new_convert->index = PLAIN;
 	new_convert->start = start;
 	new_convert->end = locate;
-	return(add_convert(converts, new_convert));
+	return (add_convert(converts, new_convert));
 }
 
 int	start_print(t_list *converts, va_list ap)
@@ -101,26 +92,50 @@ int	start_print(t_list *converts, va_list ap)
 
 int	print_convert(t_convert *text, va_list ap)
 {
-	int	result;
-
-	result = -1;
 	if (text->index == PLAIN)
-		result = print_plain(text);
+		return (print_plain(text));
 	else if (text->index == CHAR)
-		result = print_char(text, va_arg(ap, int));
+		return (print_char(text, va_arg(ap, int)));
 	else if (text->index == STR)
-		result = print_str(text, va_arg(ap, char *));
+		return (print_str(text, va_arg(ap, char *)));
 	else if (text->index == PTR)
-		result = print_ptr(text, va_arg(ap, void *));
-	else if (text->index == SDEC)
-		result = print_sdec(text, va_arg(ap, int));
+		return (print_ptr(text, va_arg(ap, void *)));
+	else if (text->index == DEC)
+		return (print_dec(text, va_arg(ap, int)));
+	else if (text->index == IDEC)
+		return (print_idec(text, va_arg(ap, int)));
 	else if (text->index == UDEC)
-		result = print_udec(text, va_arg(ap, int));
+		return (print_udec(text, va_arg(ap, int)));
 	else if (text->index == LHEX)
-		result = print_lhex(text, va_arg(ap, int));
+		return (print_lhex(text, va_arg(ap, int)));
 	else if (text->index == UHEX)
-		result = print_uhex(text, va_arg(ap, int));
+		return (print_uhex(text, va_arg(ap, int)));
 	else if (text->index == PCENT)
-		result = print_pcent(text);
-	return (result);
+		return (print_pcent(text));
+	return (-1);
+}
+
+int	check_flags(char **locate)
+{
+	locate++;
+	if (*locate == 'c')
+		return (CHAR);
+	else if (*locate == 's')
+		return (STR);
+	else if (*locate == 'p')
+		return (PTR);
+	else if (*locate == 'd')
+		return (DEC);
+	else if (*locate == 'i')
+		return (IDEC);
+	else if (*locate == 'u')
+		return (UDEC);
+	else if (*locate == 'x')
+		return (LHEX);
+	else if (*locate == 'X')
+		return (UHEX);
+	else if (*locate == '%')
+		return (PCENT);
+	else
+		return (-1);
 }

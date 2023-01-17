@@ -6,57 +6,75 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 21:58:12 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/01/17 21:39:05 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:29:53 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	print_udec(unsigned int num)
-{
-	int	len;
-
-	if (num == 0)
-	{
-		if (write(1, "0", 1) == -1)
-			return (-1);
-		return (1);
-	}
-	len = ft_itoa(num);
-	return (len);
-}
-
-int	print_lhex(unsigned int num)
-{
-	int	len;
-
-	if (num == 0)
-	{
-		if (write(1, "0", 1) == -1)
-			return (-1);
-		return (1);
-	}
-	len = ft_lhex(num);
-	return (len);
-}
-
-int	print_uhex(unsigned int num)
-{
-	int	len;
-
-	if (num == 0)
-	{
-		if (write(1, "0", 1) == -1)
-			return (-1);
-		return (1);
-	}
-	len = ft_uhex(num);
-	return (len);
-}
 
 int	print_pcent(void)
 {
 	if (write(1, "%", 1) == -1)
 		return (-1);
 	return (1);
+}
+
+int	ft_itoa(long long num)
+{
+	int		len;
+	int		result;
+	char	c;
+
+	len = 0;
+	if (num == 0)
+		return (0);
+	len++;
+	result = ft_itoa(num / 10);
+	if (result == -1)
+		return (-1);
+	len += result;
+	c = num % 10 + '0';
+	if (write(1, &c, 1) == -1)
+		return (-1);
+	return (len);
+}
+
+int	ft_lhex(unsigned long num)
+{
+	int		len;
+	int		result;
+	char	*str;
+
+	str = "0123456789abcdef";
+	len = 0;
+	if (num == 0)
+		return (0);
+	len++;
+	result = ft_lhex(num / 16);
+	if (result == -1)
+		return (-1);
+	len += result;
+	if (write(1, &(str[num % 16]), 1) == -1)
+		return (-1);
+	return (len);
+}
+
+int	ft_uhex(unsigned long num)
+{
+	int		len;
+	int		result;
+	char	*str;
+
+	str = "0123456789ABCDEF";
+	len = 0;
+	if (num == 0)
+		return (0);
+	len++;
+	result = ft_uhex(num / 16);
+	if (result == -1)
+		return (-1);
+	len += result;
+	if (write(1, &(str[num % 16]), 1) == -1)
+		return (-1);
+	return (len);
 }

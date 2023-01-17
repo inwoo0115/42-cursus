@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:23:31 by wonjin            #+#    #+#             */
-/*   Updated: 2023/01/17 21:39:14 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:31:22 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 # include <stdarg.h>
 
 int	ft_printf(const char *format, ...);
+int	print_format(va_list ap, const char *locate);
+int	start_print(va_list ap, const char *format);
 int	print_char(char c);
 int	print_str(char *str);
 int	print_ptr(void *ptr);
-int	print_dec(int num);
 int	print_int(int num);
 int	print_udec(unsigned int num);
 int	print_lhex(unsigned int num);

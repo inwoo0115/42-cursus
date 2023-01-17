@@ -6,13 +6,13 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:23:10 by wonjin            #+#    #+#             */
-/*   Updated: 2023/01/16 23:19:06 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/01/17 21:39:11 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_format(va_list ap, char *locate)
+int	print_format(va_list ap, const char *locate)
 {
 	if (*locate == 'c')
 		return (print_char(va_arg(ap, int)));
@@ -37,29 +37,27 @@ int	print_format(va_list ap, char *locate)
 
 int	start_print(va_list ap, const char *format)
 {
-	char	*locate;
 	int		len;
 	int		lenf;
 
 	len = 0;
-	locate = (char *)format;
-	while (*locate != '\0')
+	while (*format != '\0')
 	{
-		if (*locate == '%')
+		if (*format == '%')
 		{
-			locate++;
-			lenf = print_format(ap, locate);
+			format++;
+			lenf = print_format(ap, format);
 			if (lenf < 0)
 				return (-1);
 			len = len + lenf;
 		}
 		else
 		{
-			if (write(1, &locate, 1) == -1)
+			if (write(1, format, 1) == -1)
 				return (-1);
 			len++;
 		}
-		locate++;
+		format++;
 	}
 	return (len);
 }
@@ -74,13 +72,3 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (result);
 }
-/*
-#include <stdio.h>
-
-int main()
-{
-	int i = 123;
-	printf("%d\n", i);
-	ft_printf("%d\n", i);
-	return (0);
-}*/

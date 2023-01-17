@@ -5,35 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/05 21:05:56 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/01/09 19:47:55 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/01/16 21:58:12 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/01/17 21:39:05 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-//출력할 문자열의 길이 리턴
-int	print_plain(t_convert *text)
+
+int	print_udec(unsigned int num)
 {
 	int	len;
 
-	len = 0;
-
-
+	if (num == 0)
+	{
+		if (write(1, "0", 1) == -1)
+			return (-1);
+		return (1);
+	}
+	len = ft_itoa(num);
 	return (len);
 }
 
-int	print_char(t_convert *text, char c)
+int	print_lhex(unsigned int num)
 {
+	int	len;
+
+	if (num == 0)
+	{
+		if (write(1, "0", 1) == -1)
+			return (-1);
+		return (1);
+	}
+	len = ft_lhex(num);
+	return (len);
 }
 
-int	print_str(t_convert *text, char *str)
+int	print_uhex(unsigned int num)
 {
+	int	len;
+
+	if (num == 0)
+	{
+		if (write(1, "0", 1) == -1)
+			return (-1);
+		return (1);
+	}
+	len = ft_uhex(num);
+	return (len);
 }
 
-int	print_dec(t_convert *text, int num)
+int	print_pcent(void)
 {
-}
-
-int	print_idec(t_convert *text, int num)
-{
+	if (write(1, "%", 1) == -1)
+		return (-1);
+	return (1);
 }

@@ -6,7 +6,7 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 15:17:45 by wonjilee          #+#    #+#              #
-#    Updated: 2022/12/28 15:20:59 by wonjilee         ###   ########.fr        #
+#    Updated: 2023/01/17 21:39:16 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAG = -Wall -Wextra -Werror
 
 INCLUDES = ./ft_printf.h
 
-SRCS = ft_printf.c ft_printf_function.c ft_printf_function2.c
+SRCS = ft_printf.c ft_printf_function.c ft_printf_function2.c ft_printf_function3.c
 
 OBJS = $(SRCS:.c=.o)
 

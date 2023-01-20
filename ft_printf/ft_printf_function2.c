@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 21:58:12 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/01/17 22:29:53 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:52:17 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_itoa(long long num)
 	return (len);
 }
 
-int	ft_lhex(unsigned long num)
+int	ft_lhex(size_t num)
 {
 	int		len;
 	int		result;
@@ -59,7 +59,7 @@ int	ft_lhex(unsigned long num)
 	return (len);
 }
 
-int	ft_uhex(unsigned long num)
+int	ft_uhex(size_t num)
 {
 	int		len;
 	int		result;

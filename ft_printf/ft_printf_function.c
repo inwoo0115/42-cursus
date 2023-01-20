@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 20:04:32 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/01/17 22:35:59 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:52:42 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	print_ptr(void *ptr)
 {
-	unsigned long	num;
+	uintptr_t		num;
 	int				len;
 
-	num = (unsigned long)(ptr);
+	num = (uintptr_t)(ptr);
 	if (write(1, "0x", 2) == -1)
 		return (-1);
 	if (num == 0)

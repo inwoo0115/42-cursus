@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 19:33:33 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/01/17 22:14:25 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/01/24 02:47:41 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/01/24 05:19:02 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,28 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# ifndef OPEN_MAX
-#  define OPEN_MAX 49152
-# endif
-
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
 # endif
 
+typedef struct s_list
+{
+	int				fd;
+	int				index;
+	int				len;
+	char			buff[BUFFER_SIZE + 1];
+	struct s_list	*next;
+}	t_list;
+
 char	*get_next_line(int fd);
-char	*get_newline(int fd, char *buff, char *data, int len);
-char	*make_data(char *str);
-char	*make_line(char	*str);
-int		check_newline(char *data);
+char	*make_line(char	*str, t_list *data, t_list **head, int fd);
+char	*get_newline(int fd, char *buff, t_list *data, int len);
+char	*find_data(t_list *data, int i);
 char	*ft_strjoin(char *s1, char *s2);
+int		check_newline(char *str, t_list *data, int i, int j);
 size_t	ft_strlen(char *s);
+t_list	*check_data(t_list **head, int fd);
+void	create_data(t_list *data, int fd);
+char	*free_res(t_list *data, t_list **head, int fd);
 
 #endif

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 14:10:45 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/01/17 22:07:38 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/01/23 20:08:00 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/01/24 05:18:36 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,20 @@
 #  define BUFFER_SIZE 1024
 # endif
 
+typedef struct s_list
+{
+	int				fd;
+	int				index;
+	int				len;
+	char			buff[BUFFER_SIZE + 1];
+}	t_list;
+
 char	*get_next_line(int fd);
-char	*get_newline(int fd, char *buff, char *data, int len);
-char	*make_data(char *str);
 char	*make_line(char	*str);
-int		check_newline(char *data);
+char	*get_newline(int fd, char *buff, t_list *data, int len);
+char	*find_data(t_list *data, int i);
 char	*ft_strjoin(char *s1, char *s2);
+int		check_newline(char *str, t_list *data, int i, int j);
 size_t	ft_strlen(char *s);
 
 #endif

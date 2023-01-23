@@ -5,111 +5,129 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 19:33:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/01/17 22:10:30 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/01/24 02:47:07 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/01/24 05:23:11 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*get_newline(int fd, char *buff, char *data, int len)
+void	create_data(t_list *data, int fd)
 {
-	char	*temp;
-
-	len = read(fd, buff, BUFFER_SIZE);
-	if (len < 0)
-		return (0);
-	while (len > 0)
-	{
-		buff[len] = '\0';
-		if (!data)
-		{
-			data = (char *)malloc(1);
-			if (!(data))
-				return (0);
-			data[0] = '\0';
-		}
-		temp = data;
-		data = ft_strjoin(temp, buff);
-		free(temp);
-		if (!(data))
-			return (0);
-		if (check_newline(data))
-			break ;
-		len = read(fd, buff, BUFFER_SIZE);
-	}
-	return (data);
+	data->fd = fd;
+	data->index = -1;
+	data->len = 0;
+	data->buff[0] = '\0';
+	data->next = 0;
 }
 
-char	*make_data(char *str)
+char	*find_data(t_list *data, int i)
 {
 	char	*temp;
-	int		i;
-	int		j;
-	int		index;
 
-	j = 0;
-	i = 0;
-	while (str[i] && str[i] != '\n')
-		i++;
-	index = i;
-	if (str[i] == '\0' || str[i + 1] == '\0')
-		return (0);
-	temp = (char *)malloc(ft_strlen(str) - i);
-	if (!temp)
-		return (0);
-	i++;
-	while (str[i])
-		temp[j++] = str[i++];
-	temp[j] = '\0';
-	str[index + 1] = '\0';
+	if (data->index == -1)
+	{
+		temp = (char *)malloc(1);
+		if (!temp)
+			return (0);
+		temp[0] = '\0';
+	}
+	else
+	{
+		temp = (char *)malloc(data->len);
+		if (!temp)
+			return (0);
+		while (i < data->len - 1)
+		{
+			temp[i] = data->buff[i];
+			i++;
+		}
+		temp[i] = '\0';
+		data->index = -1;
+		data->len = 0;
+		data->buff[0] = '\0';
+	}
 	return (temp);
 }
 
-char	*make_line(char	*str)
+char	*get_newline(int fd, char *buff, t_list *data, int len)
 {
 	char	*temp;
-	int		i;
 
-	i = 0;
-	temp = (char *)malloc(ft_strlen(str) + 1);
+	temp = find_data(data, 0);
 	if (!temp)
+		return (0);
+	if (check_newline(temp, data, 0, 0))
+		return (temp);
+	len = read(fd, buff, BUFFER_SIZE);
+	if (len < 0)
 	{
-		free(str);
-		str = 0;
+		free(temp);
 		return (0);
 	}
-	while (str[i])
+	while (len > 0)
 	{
-		temp[i] = str[i];
-		i++;
+		buff[len] = '\0';
+		temp = ft_strjoin(temp, buff);
+		if (!temp)
+			return (0);
+		if (check_newline(buff, data, 0, 0))
+			break ;
+		len = read(fd, buff, BUFFER_SIZE);
 	}
-	temp[i] = '\0';
-	free(str);
-	str = 0;
 	return (temp);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*data[OPEN_MAX];
-	char		*buff;
-	char		*str;
+	static t_list	*head;
+	t_list			*data;
+	char			*buff;
+	char			*str;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (0);
+	data = check_data(&head, fd);
+	if (!data)
+		return (0);
 	buff = (char *)malloc(BUFFER_SIZE + 1);
 	if (!(buff))
-		return (0);
-	str = get_newline(fd, buff, data[fd], 1);
+		return (free_res(data, &head, fd));
+	str = get_newline(fd, buff, data, 1);
 	free(buff);
 	buff = 0;
 	if (str == 0 || str[0] == '\0')
 	{
-		free(data[fd]);
-		data[fd] = 0;
-		return (0);
+		free(str);
+		return (free_res(data, &head, fd));
 	}
-	data[fd] = make_data(str);
-	return (make_line(str));
+	return (make_line(str, data, &head, fd));
+}
+
+char	*free_res(t_list *data, t_list **head, int fd)
+{
+	t_list	*curr;
+
+	curr = *head;
+	while (curr->next && (curr->next)->fd != fd)
+		curr = curr->next;
+	if (curr->next && fd == curr->next->fd)
+	{
+		curr->next = data->next;
+		free(data);
+	}
+	else if ((*head)->fd == fd)
+	{
+		if ((*head)->next == NULL)
+		{
+			free(*head);
+			*head = NULL;
+		}
+		else
+		{
+			*head = (*head)->next;
+			free(data);
+		}
+	}
+	return (0);
 }

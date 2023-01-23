@@ -5,22 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 15:07:10 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/01/17 22:10:37 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/01/23 20:21:38 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/01/24 05:18:40 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-size_t	ft_strlen(char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -34,26 +24,41 @@ char	*ft_strjoin(char *s1, char *s2)
 	len = ft_strlen(s1) + ft_strlen(s2);
 	newstr = (char *)malloc(len + 1);
 	if (newstr == 0)
+	{
+		free(s1);
 		return (0);
+	}
 	while (s1[j])
 		newstr[i++] = s1[j++];
 	j = 0;
 	while (s2[j])
 		newstr[i++] = s2[j++];
 	newstr[i] = '\0';
+	free(s1);
 	return (newstr);
 }
 
-int	check_newline(char *data)
+size_t	ft_strlen(char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (data[i])
-	{
-		if (data[i] == '\n')
-			return (1);
+	while (s[i])
 		i++;
-	}
-	return (0);
+	return (i);
+}
+
+int	check_newline(char *str, t_list *data, int i, int j)
+{
+	while (str[i] != '\n' && str[i])
+		i++;
+	if (str[i] != '\n')
+		return (0);
+	data->index = i;
+	i++;
+	while (str[i])
+		data->buff[j++] = str[i++];
+	data->len = i - data->index;
+	data->buff[j] = '\0';
+	return (1);
 }

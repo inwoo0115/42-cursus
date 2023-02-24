@@ -1,79 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 02:47:07 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/01/24 20:04:17 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/01/23 17:42:51 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/02/18 20:24:07 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
-
-char	*get_next_line(int fd)
-{
-	static t_list	*head;
-	t_list			*data;
-	char			*buff;
-	char			*str;
-
-	if (fd < 0 || BUFFER_SIZE < 1)
-		return (0);
-	data = check_data(&head, fd);
-	if (!data)
-		return (0);
-	buff = (char *)malloc(BUFFER_SIZE + 1);
-	if (!(buff))
-		return (free_res(data, &head, fd));
-	str = get_newline(fd, buff, data, 1);
-	free(buff);
-	buff = 0;
-	if (str == 0 || str[0] == '\0')
-	{
-		free(str);
-		return (free_res(data, &head, fd));
-	}
-	return (make_line(str, data, &head, fd));
-}
-
-void	create_data(t_list *data, int fd)
-{
-	data->fd = fd;
-	data->index = -1;
-	data->len = 0;
-	data->buff[0] = '\0';
-	data->next = 0;
-}
-
-char	*free_res(t_list *data, t_list **head, int fd)
-{
-	t_list	*curr;
-
-	curr = *head;
-	while (curr->next && (curr->next)->fd != fd)
-		curr = curr->next;
-	if (curr->next && fd == curr->next->fd)
-	{
-		curr->next = data->next;
-		free(data);
-	}
-	else if ((*head)->fd == fd)
-	{
-		if ((*head)->next == NULL)
-		{
-			free(*head);
-			*head = NULL;
-		}
-		else
-		{
-			*head = (*head)->next;
-			free(data);
-		}
-	}
-	return (0);
-}
+#include "get_next_line.h"
 
 char	*find_data(t_list *data, int i)
 {
@@ -130,4 +67,55 @@ char	*get_newline(int fd, char *buff, t_list *data, int len)
 		len = read(fd, buff, BUFFER_SIZE);
 	}
 	return (temp);
+}
+
+char	*make_line(char	*str)
+{
+	int		i;
+	int		j;
+	char	*temp;
+
+	i = 0;
+	j = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (str[i] == '\0' || str[i + 1] == '\0')
+		return (str);
+	i++;
+	temp = (char *)malloc(i + 1);
+	if (!temp)
+	{
+		free(str);
+		return (0);
+	}
+	while (j < i)
+	{
+		temp[j] = str[j];
+		j++;
+	}
+	temp[j] = '\0';
+	free(str);
+	return (temp);
+}
+
+char	*get_next_line(int fd)
+{
+	static t_list	data = {0, -1, 0, "\0"};
+	char			*buff;
+	char			*str;
+
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (0);
+	buff = (char *)malloc(BUFFER_SIZE + 1);
+	if (!(buff))
+		return (0);
+	str = get_newline(fd, buff, &data, 1);
+	free(buff);
+	buff = 0;
+	if (str == 0 || str[0] == '\0')
+	{
+		free(str);
+		return (0);
+	}
+	return (make_line(str));
 }

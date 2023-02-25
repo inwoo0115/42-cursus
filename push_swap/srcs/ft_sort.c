@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:27:30 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/25 05:27:00 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/25 06:55:36 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_sort(t_stack *a, t_stack *b)
 	tri = data.tri;
 	while (tri > 1)
 	{
-		local_sort(&data, a, b, 4);
+		local_sort(&data, a, b);
 		tri--;
 	}
 	if (data.left && data.tri <= 12)

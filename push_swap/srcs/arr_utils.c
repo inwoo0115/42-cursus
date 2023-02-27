@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:57:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 04:50:49 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 05:59:30 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	make_stack(t_stack *a, int argc, char *argv[])
 		exit (0);
 	a->rear = 0;
 	a->front = a->size - 1;
-	make_arr(a, argc, argv, 0);
+	make_arr(a, argc, argv, 1);
 	check_arr(a);
 }
 
@@ -46,7 +46,7 @@ void	make_arr(t_stack *a, int argc, char *argv[], int idx)
 		j = 0;
 		while (temp[j])
 		{
-			a->data[idx++] = ft_atoi(temp[j], &error, 0, 0);
+			a->data[a->size - idx++] = ft_atoi(temp[j], &error, 0, 0);
 			free(temp[j++]);
 		}
 		free(temp);

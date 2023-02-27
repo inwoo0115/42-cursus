@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 19:47:09 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 04:47:38 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 07:09:15 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ enum e_cmd
 
 enum e_tri
 {
-	ABOT,
-	BTOP,
-	BBOT,
+	ABOT = 1,
+	BTOP = 2,
+	BBOT = 3,
 	NONE = 100
 };
 

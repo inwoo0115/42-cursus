@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 19:47:09 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 01:22:48 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 01:30:44 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ enum e_cmd
 
 enum e_tri
 {
-	ABOT;
-	BTOP;
-	BBOT;
-	NONE = 100;
+	ABOT,
+	BTOP,
+	BBOT,
+	NONE = 100
 };
 
 //main
@@ -92,7 +92,7 @@ void	rotate(t_stack *stack);
 void	re_rotate(t_stack *stack);
 
 //command_print
-void	ps_command(int order, t_stack *a, t_stack *b);
+void	p_command(int order, t_stack *a, t_stack *b);
 void	r_command(int order, t_stack *a, t_stack *b);
 void	d_command(int order, t_stack *a, t_stack *b);
 

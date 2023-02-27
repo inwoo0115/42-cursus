@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:27:30 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 01:17:29 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 01:33:03 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	check_tri(t_info *data, t_stack *a)
 
 void	merge_tri(t_info *data, t_stack *a, t_stack *b, int result)
 {
-	result = compare_num(a, b, a->data[a->top], data);
+	result = compare_num(a, b, a->data[a->front], data);
 	while (result != 0)
 	{
 		if (result == ABOT)
@@ -83,7 +83,7 @@ void	merge_tri(t_info *data, t_stack *a, t_stack *b, int result)
 			p_command(PA, a, b);
 			data->bt_num--;
 		}
-		result = compare_num(a, b, a->data[a->top], data);
+		result = compare_num(a, b, a->data[a->front], data);
 	}
 }
 
@@ -96,23 +96,23 @@ int	compare_num(t_stack *a, t_stack *b, int a_top, t_info *data)
 	else if (data->bb_num)
 		temp = b->data[b->rear];
 	else if (data->bt_num)
-		temp = b->data[b->top];
+		temp = b->data[b->front];
 	else
 		return (0);
 	if (a->data[a->rear] > a_top && b->data[b->rear] > a_top && \
-	b->data[b->top] > a_top)
+	b->data[b->front] > a_top)
 		return (new_max(a, b, temp, data));
 	if (data->ab_num && temp < a->data[a->rear] && a->data[a->rear] < a_top)
 		temp = a->data[a->rear];
 	if (data->bb_num && temp < b->data[b->rear] && b->data[b->rear] < a_top)
 		temp = b->data[b->rear];
-	if (data->bt_num && temp < b->data[b->top] && b->data[b->top] < a_top)
-		temp = b->data[b->top];
+	if (data->bt_num && temp < b->data[b->front] && b->data[b->front] < a_top)
+		temp = b->data[b->front];
 	if (temp == a->data[a->rear])
 		return (ABOT);
 	else if (temp == b->data[b->rear])
 		return (BBOT);
-	else if (temp == b->data[b->top])
+	else if (temp == b->data[b->front])
 		return (BTOP);
 }
 
@@ -122,12 +122,12 @@ int	new_max(t_stack *a, t_stack *b, int temp, t_info *data)
 		temp = a->data[a->rear];
 	if (data->bb_num && temp < b->data[b->rear])
 		temp = b->data[b->rear];
-	if (data->bt_num && temp < b->data[b->top])
-		temp = b->data[b->top];
+	if (data->bt_num && temp < b->data[b->front])
+		temp = b->data[b->front];
 	if (temp == a->data[a->rear])
 		return (ABOT);
 	else if (temp == b->data[b->rear])
 		return (BBOT);
-	else if (temp == b->data[b->top])
+	else if (temp == b->data[b->front])
 		return (BTOP);
 }

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:27:30 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 07:43:51 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 08:49:11 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_sort(t_stack *a, t_stack *b)
 	while (find_tri(&data, a) > 1)
 	{
 		if (data.tri == 2)
-			pass_tri_2(&data, a, b);
+			pass_tri_2(&data, a, b, 0);
 		else
 			pass_tri(&data, a, b, 0);
 		merge_tri(&data, a, b, 0);

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:57:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 05:59:30 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 07:56:44 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,15 @@ int	ft_atoi(char *str, int *error, int num, int temp)
 		pm = -1;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-	if (str[i] == 0)
-		*error = 0;
+//	if (str[i] == 0)
+//		*error = 0;
 	while (str[i])
 	{
 		if (str[i] >= '0' && str[i] <= '9')
 		{
 			temp = num;
 			num = num * 10 + pm * (str[i] - '0');
-			if ((pm == -1 && temp <= num) || (pm == 1 && temp >= num))
+			if ((pm == -1 && temp < num) || (pm == 1 && temp > num))
 				*error = 0;
 		}
 		else

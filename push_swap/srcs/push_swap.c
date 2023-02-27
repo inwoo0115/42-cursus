@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 17:43:13 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 01:33:42 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 04:49:38 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ int	main(int argc, char *argv[])
 	t_stack	b;
 
 	make_stack(&a, argc, argv);
+	check_arr(&a);
 	b.size = a.size;
 	b.front = -1;
 	b.rear = -1;
 	b.data = malloc(sizeof(int) * (a.size + 1));
 	if (!(b.data))
 		return (free_res(&a, &b));
-	if (a.size == 1 || !check_arr(a))
+	if (a.size == 1)
 		return (free_res(&a, &b));
 	if (a.size <= 5)
 		single_sort(&a, &b, a.size);

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 05:11:55 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/27 19:33:06 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 04:50:49 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	small_sort(t_stack *a, t_stack *b, int size)
 	last = (next - 1 + a->size) % a->size;
 	if (size == 2)
 	{
-		if (data->a[a->front] > data->a[next])
+		if (a->data[a->front] > a->data[next])
 			s_command(SA, a, b);
 	}
 	else if (size == 3)

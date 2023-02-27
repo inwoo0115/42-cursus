@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:27:30 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 01:33:40 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 04:39:40 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int	compare_num(t_stack *a, t_stack *b, int a_top, t_info *data)
 		return (BBOT);
 	else if (temp == b->data[b->front])
 		return (BTOP);
+	return (0);
 }
 
 int	new_max(t_stack *a, t_stack *b, int temp, t_info *data)
@@ -130,4 +131,5 @@ int	new_max(t_stack *a, t_stack *b, int temp, t_info *data)
 		return (BBOT);
 	else if (temp == b->data[b->front])
 		return (BTOP);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 19:47:09 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 01:30:44 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 04:47:38 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	re_rotate(t_stack *stack);
 void	p_command(int order, t_stack *a, t_stack *b);
 void	r_command(int order, t_stack *a, t_stack *b);
 void	d_command(int order, t_stack *a, t_stack *b);
+void	s_command(int order, t_stack *a, t_stack *b);
 
 //ft_sort
 void	ft_sort(t_stack *a, t_stack *b);
@@ -121,7 +122,7 @@ void	small_sort_size3(t_stack *a, t_stack *b, int next, int last);
 //local_sort1
 void	local_sort(t_info *data, t_stack *a, t_stack *b);
 void	init_num(t_stack *a, t_cmd *cmd, int temp, int num);
-void	check_command(t_info *data, t_stack *a, t_stack *b, t_cmd *cmd);
+void	check_command(t_info *data, t_cmd *cmd);
 
 //local_sort2
 int		ab_command(t_cmd *cmd, int num);
@@ -130,23 +131,23 @@ int		bb_command(t_cmd *cmd, int num);
 int		bt_command(t_cmd *cmd, int num);
 
 //local_sort3
-void	local_abot(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
-void	local_abot_num0(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
-void	local_abot_num1(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
-void	local_abot_num2(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
-void	local_abot_num3(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
+void	local_abot(t_stack *a, t_stack *b, t_cmd cmd);
+void	local_abot_num0(t_stack *a, t_stack *b, t_cmd cmd);
+void	local_abot_num1(t_stack *a, t_stack *b, t_cmd cmd);
+void	local_abot_num2(t_stack *a, t_stack *b, t_cmd cmd);
+void	local_abot_num3(t_stack *a, t_stack *b, t_cmd cmd);
 
 //local_sort4
-void	local_btop(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
-void	local_btop_num0(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
-void	local_btop_num1(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
-void	local_btop_num2(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
-void	local_btop_num3(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
+void	local_btop(t_stack *a, t_stack *b, t_cmd cmd);
+void	local_btop_num0(t_stack *a, t_stack *b, t_cmd cmd);
+void	local_btop_num1(t_stack *a, t_stack *b, t_cmd cmd);
+void	local_btop_num2(t_stack *a, t_stack *b, t_cmd cmd);
+void	local_btop_num3(t_stack *a, t_stack *b, t_cmd cmd);
 
 //local_sort5
-void	local_bbot(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
-void	local_bbot_num0(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
-void	local_bbot_num1(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
-void	local_bbot_num2(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
-void	local_bbot_num3(t_info *data, t_stack *a, t_stack *b, t_cmd cmd);
+void	local_bbot(t_stack *a, t_stack *b, t_cmd cmd);
+void	local_bbot_num0(t_stack *a, t_stack *b, t_cmd cmd);
+void	local_bbot_num1(t_stack *a, t_stack *b, t_cmd cmd);
+void	local_bbot_num2(t_stack *a, t_stack *b, t_cmd cmd);
+void	local_bbot_num3(t_stack *a, t_stack *b, t_cmd cmd);
 #endif

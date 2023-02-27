@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:45:45 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/27 21:24:16 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 04:50:07 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	single_sort(t_stack *a, t_stack *b, int size)
 	next = (a->front - 1 + a->size) % a->size;
 	if (size == 2)
 	{
-		if (data->a[a->front] > data->a[next])
+		if (a->data[a->front] > a->data[next])
 			s_command(SA, a, b);
 	}
 	else if (size == 3)

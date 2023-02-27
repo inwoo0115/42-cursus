@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 06:29:45 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/25 09:01:21 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 01:15:35 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,69 @@
 
 void	local_sort(t_info *data, t_stack *a, t_stack *b)
 {
-	int	num1;
-	int	num2;
-	int	num3;
-	int	num4;
+	t_cmd	cmd;
 
-	num1 = a->front;
-	num2 = (num1 - 1 + a->size) % a->size;
-	num3 = (num2 - 1 + a->size) % a->size;
-	num4 = (num3 - 1 + a->size) % a->size;
+	cmd.num = {0, 0, 0, 0};
+	init_num(a, &cmd, a->front, 0);
+	check_command(data, a, b, &cmd);
+	if (cmd.bb_cmd < 9)
+	{
+		local_bbot(data, a, b, cmd);
+		data->b_bot--;
+	}
+	else if (cmd.ab_cmd < cmd.bt_cmd && cmd.ab_cmd != NONE)
+	{
+		local_abot(data, a, b, cmd);
+		data->a_bot--;
+	}
+	else if (cmd.ab_cmd >= cmd.bt_cmd && cmd.bt_cmd != NONE)
+	{
+		local_btop(data, a, b, cmd);
+		data->b_top--;
+	}
+	else
+	{
+		local_bbot(data, a, b, cmd);
+		data->b_bot--;
+	}
 }
 
-int	check_command(t_info *data, t_stack *a, t_stack *b)
+void	init_num(t_stack *a, t_cmd *cmd, int temp, int num)
 {
+	int	i;
+	int	j;
+
+	cmd->bt_cmd = 0;
+	cmd->bb_cmd = 0;
+	cmd->ab_cmd = 0;
+	j = 1;
+	while (j < 4)
+	{
+		i = 0;
+		while (i < 4)
+		{
+			num = (a->front - i + a->size) % a->size;
+			if (a->data[temp] <= a->data[num])
+				cmd->num[i]++;
+			i++;
+		}
+		temp = (a->front - j + a->size) % a->size;
+		j++;
+	}
 }
 
-int	local_abot(t_info *data, t_stack *a, t_stack *b)
-int	local_bbot(t_info *data, t_stack *a, t_stack *b)
-int	local_btop(t_info *data, t_stack *a, t_stack *b)
-
+void	check_command(t_info *data, t_stack *a, t_stack *b, t_cmd *cmd)
+{
+	if (data->b_top > 0)
+		cmd->bt_cmd = bt_command(cmd, 0);
+	if (data->b_top == 0)
+		cmd->bt_cmd = NONE;
+	if (data->b_bot > 0)
+		cmd->bb_cmd = bb_command(cmd, 0);
+	if (data->b_bot == 0)
+		cmd->bb_cmd = NONE;
+	if (data->a_bot > 0)
+		cmd->ab_cmd = ab_command(cmd, 0);
+	if (data->a_bot == 0)
+		cmd->ab_cmd = NONE;
+}

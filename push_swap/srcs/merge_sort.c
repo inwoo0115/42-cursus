@@ -6,13 +6,13 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 09:55:09 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/25 05:24:25 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 01:15:49 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	find_tri(t_info *data, t_stack *a)
+int	find_tri(t_info *data, t_stack *a)
 {
 	int	num;
 	int	next;
@@ -31,6 +31,7 @@ void	find_tri(t_info *data, t_stack *a)
 	}
 	data->tri = num;
 	data->tri_left = num % 3;
+	return (num);
 }
 
 void	pass_tri_2(t_info *data, t_stack *a, t_stack *b)

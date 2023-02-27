@@ -6,7 +6,7 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 23:29:33 by wonjilee          #+#    #+#              #
-#    Updated: 2023/01/31 17:54:53 by wonjilee         ###   ########.fr        #
+#    Updated: 2023/02/28 01:25:40 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ NAME_BONUS = checker
 CC = cc
 CFLAG = -Wall -Wextra -Werror
 
-SRCS = 
-
-SRCS_BONUS = 
+SRCS = arr_utils.c command_print.c command.c ft_sort.c ft_split.c local_sort1.c \
+local_sort2.c local_sort3.c local_sort4.c local_sort5.c merge_sort.c push_swap.c \
+single_sort.c small_sort.c
 
 OBJS = $(SRCS:.c=.o)
 

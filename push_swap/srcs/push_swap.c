@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 17:43:13 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/25 05:24:20 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 01:22:14 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,3 @@ int	main(int argc, char *argv[])
 		ft_sort(&a, &b);
 	return (free_res(&a, &b));
 }
-
-//to do list
-//76개 하드코딩

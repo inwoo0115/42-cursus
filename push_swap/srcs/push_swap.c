@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 17:43:13 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 09:15:56 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:11:05 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char *argv[])
 	b.data = malloc(sizeof(int) * (a.size + 1));
 	if (!(b.data))
 		return (free_res(&a, &b));
-	if (a.size == 1)
+	if (a.size == 1 || !check_sort(&a))
 		return (free_res(&a, &b));
 	if (a.size <= 5)
 		single_sort(&a, &b, a.size);

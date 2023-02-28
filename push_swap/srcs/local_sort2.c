@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 20:22:18 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 05:52:36 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:54:11 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,18 @@ int	bb_command(t_cmd *cmd, int num)
 
 int	bt_command(t_cmd *cmd, int num)
 {
-	if (cmd->num[0] == 2 && cmd->num[1] == 1 && cmd->num[2] == 4)
-		num = ab_command(cmd, 0) - 1;
-	else if (cmd->num[0] == 2 && cmd->num[1] == 4 && cmd->num[2] == 1)
-		num = ab_command(cmd, 0) - 1;
-	else
-		num = ab_command(cmd, 0);
+	num = ab_command(cmd, 0);
+	if (cmd->num[1] == 1)
+	{
+		if (cmd->num[0] == 2 && cmd->num[2] == 4)
+			num = 5;
+		else if (cmd->num[0] == 4 && cmd->num[2] == 2)
+			num = 7;
+		else if (cmd->num[0] == 3 && cmd->num[2] == 4)
+			num = 6;
+	}
+	else if (cmd->num[0] == 2 && cmd->num[2] == 1)
+		num = 6;
+
 	return (num);
 }

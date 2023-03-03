@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:57:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 07:56:44 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/03 19:52:25 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	make_stack(t_stack *a, int argc, char *argv[])
 		a->size += num_word(argv[i++], ' ');
 	a->data = malloc(sizeof(int) * (a->size + 1));
 	if (!a->data)
-		exit (0);
+		ft_error(a);
 	a->rear = 0;
 	a->front = a->size - 1;
 	make_arr(a, argc, argv, 1);
@@ -52,7 +52,7 @@ void	make_arr(t_stack *a, int argc, char *argv[], int idx)
 		free(temp);
 		i++;
 	}
-	if (error == 0 || argc <= 1)
+	if (error == 0)
 		ft_error(a);
 }
 
@@ -78,7 +78,8 @@ void	check_arr(t_stack *a)
 void	ft_error(t_stack *a)
 {
 	write(2, "Error\n", 6);
-	free(a->data);
+	if (a->data)
+		free(a->data);
 	exit (0);
 }
 
@@ -93,8 +94,8 @@ int	ft_atoi(char *str, int *error, int num, int temp)
 		pm = -1;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-//	if (str[i] == 0)
-//		*error = 0;
+	if (!str[i])
+		*error = 0;
 	while (str[i])
 	{
 		if (str[i] >= '0' && str[i] <= '9')

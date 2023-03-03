@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 09:55:09 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 08:58:21 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/03 22:07:17 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ int	find_tri(t_info *data, t_stack *a)
 
 	num = 1;
 	prev = a->front;
+	next = (a->front - 1 + a->size) % a->size;
 	while (1)
 	{
-		next = (prev - 1 + a->size) % a->size;
 		if (a->data[next] < a->data[prev])
 			num++;
 		if (next == a->rear)
 			break ;
-		prev = next;
+		prev = (prev - 1 + a->size) % a->size;
+		next = (next - 1 + a->size) % a->size;
 	}
 	data->tri = num;
 	data->tri_left = num % 3;

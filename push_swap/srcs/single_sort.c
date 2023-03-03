@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:45:45 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 10:15:29 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/03 20:41:23 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	sort_size3(t_stack *a, t_stack *b)
 	}
 	else
 	{
-		if (a->data[a->front] > a->data[next])
+		if (a->data[a->front] < a->data[next])
 			s_command(SA, a, b);
 		r_command(RA, a, b);
 	}
@@ -67,9 +67,9 @@ void	sort_size4(t_stack *a, t_stack *b)
 	{
 		if (a->data[min] > a->data[next])
 			min = next;
-		next = (next - 1 + a->size) % a->size;
 		if (next == a->rear)
 			break ;
+		next = (next - 1 + a->size) % a->size;
 	}
 	while (min != a->front)
 		r_command(RA, a, b);
@@ -89,12 +89,17 @@ void	sort_size5(t_stack *a, t_stack *b)
 	{
 		if (a->data[min] > a->data[next])
 			min = next;
-		next = (next - 1 + a->size) % a->size;
 		if (next == a->rear)
 			break ;
+		next = (next - 1 + a->size) % a->size;
 	}
-	while (min != a->front)
-		r_command(RA, a, b);
+	if (min == a->rear)
+		r_command(RRA, a, b);
+	else
+	{
+		while (min != a->front)
+			r_command(RA, a, b);
+	}
 	p_command(PB, a, b);
 	sort_size4(a, b);
 	p_command(PA, a, b);

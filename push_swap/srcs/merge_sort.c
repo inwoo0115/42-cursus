@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 09:55:09 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/03 22:07:17 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/05 22:45:41 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,20 @@ void	pass_tri(t_info *data, t_stack *a, t_stack *b, int i)
 	while (i < data->tri / 3)
 	{
 		next = (a->front - 1 + a->size) % a->size;
-		data->bt_num++;
 		if (a->data[a->front] > a->data[next])
 			i++;
 		p_command(PB, a, b);
+		data->bt_num++;
 	}
 	i = 0;
 	while (i < data->tri / 3)
 	{
 		next = (a->front - 1 + a->size) % a->size;
-		data->bb_num++;
 		if (a->data[a->front] > a->data[next])
 			i++;
 		p_command(PB, a, b);
 		r_command(RB, a, b);
+		data->bb_num++;
 	}
 	data->ab_num = a->size - data->bt_num - data->bb_num;
 }

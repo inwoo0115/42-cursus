@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 23:50:41 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 04:48:24 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/05 21:31:27 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	local_bbot_num2(t_stack *a, t_stack *b, t_cmd cmd)
 	p_command(PB, a, b);
 	p_command(PB, a, b);
 	r_command(RB, a, b);
-	if (cmd.num[0] > cmd.num[1])
+	if (cmd.num[0] < cmd.num[1])
 		s_command(SB, a, b);
 	if (cmd.num[3] == 2)
 	{

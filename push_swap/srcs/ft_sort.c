@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:27:30 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/03 22:07:06 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/05 23:23:49 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ void	ft_sort(t_stack *a, t_stack *b)
 
 	check_tri(&data, a);
 	tri = data.tri;
-	while (tri > 1)
+	while (tri > 0)
 	{
+		if (data.left && tri == 1)
+			break ;
 		local_sort(&data, a, b);
 		tri--;
 	}
@@ -29,13 +31,14 @@ void	ft_sort(t_stack *a, t_stack *b)
 	if (data.left && a->size > 12)
 		small_sort(a, b, data.left);
 	merge_tri(&data, a, b, 0);
-	while (find_tri(&data, a) > 1)
+	while (find_tri(&data, a) > 1 && tri < 5)
 	{
 		if (data.tri == 2)
 			pass_tri_2(&data, a, b, 0);
 		else
 			pass_tri(&data, a, b, 0);
 		merge_tri(&data, a, b, 0);
+		tri++;
 	}
 }
 
@@ -61,24 +64,26 @@ void	check_tri(t_info *data, t_stack *a)
 void	merge_tri(t_info *data, t_stack *a, t_stack *b, int result)
 {
 	result = new_max(a, b, 0, data);
-	while (result != 0)
+	while (data->ab_num > 0 || data->bb_num > 0 || data->bt_num > 0)
 	{
-		if (result == ABOT)
+		if (result == ABOT && data->ab_num > 0)
 		{
 			r_command(RRA, a, b);
 			data->ab_num--;
 		}
-		else if (result == BBOT)
+		else if (result == BBOT && data->bb_num > 0)
 		{
 			r_command(RRB, a, b);
 			p_command(PA, a, b);
 			data->bb_num--;
 		}
-		else if (result == BTOP)
+		else if (result == BTOP && data->bt_num > 0)
 		{
 			p_command(PA, a, b);
 			data->bt_num--;
 		}
+		else
+			break ;
 		result = compare_num(a, b, a->data[a->front], data);
 	}
 }
@@ -89,10 +94,10 @@ int	compare_num(t_stack *a, t_stack *b, int top, t_info *data)
 
 	if (data->ab_num > 0 && a->data[a->rear] < top)
 		temp = a->data[a->rear];
-	else if (data->bb_num > 0 && b->data[b->rear] < top)
-		temp = b->data[b->rear];
 	else if (data->bt_num > 0 && b->data[b->front] < top)
 		temp = b->data[b->front];
+	else if (data->bb_num > 0 && b->data[b->rear] < top)
+		temp = b->data[b->rear];
 	else if (data->ab_num > 0 || data->bb_num > 0 || data->bt_num > 0)
 		return (new_max(a, b, 0, data));
 	else

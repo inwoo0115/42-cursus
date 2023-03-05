@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 23:29:07 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/03 17:43:26 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/05 21:00:24 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ void	local_abot_num0(t_stack *a, t_stack *b, t_cmd cmd)
 		if (cmd.num[2] == 3)
 		{
 			r_command(RA, a, b);
-			p_command(PB, a, b);
+			p_command(PA, a, b);
 		}
 		else
 		{
-			p_command(PB, a, b);
+			p_command(PA, a, b);
 			r_command(RA, a, b);
 		}
 		r_command(RA, a, b);

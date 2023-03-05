@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 23:50:22 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/02/28 09:50:14 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/05 21:23:10 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	local_btop_num0(t_stack *a, t_stack *b, t_cmd cmd)
 	else
 	{
 		if (cmd.num[3] == 3)
-			s_command(PB, a, b);
+			s_command(SA, a, b);
 		p_command(PB, a, b);
 		p_command(PB, a, b);
 	}
@@ -122,7 +122,7 @@ void	local_btop_num2(t_stack *a, t_stack *b, t_cmd cmd)
 		}
 		else
 		{
-			r_command(RB, a, b);
+			p_command(PB, a, b);
 			r_command(RB, a, b);
 		}
 		r_command(RB, a, b);

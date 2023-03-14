@@ -6,12 +6,11 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 17:43:13 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/03 19:58:35 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:42:09 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int	free_res(t_stack *a, t_stack *b)
 {

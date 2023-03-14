@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:27:30 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/05 23:23:49 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:33:57 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@ void	ft_sort(t_stack *a, t_stack *b)
 	if (data.left && a->size > 12)
 		small_sort(a, b, data.left);
 	merge_tri(&data, a, b, 0);
-	while (find_tri(&data, a) > 1 && tri < 5)
+	while (find_tri(&data, a) > 1)
 	{
 		if (data.tri == 2)
 			pass_tri_2(&data, a, b, 0);
+		else if (data.tri_left == 2)
+			pass_tri_left(&data, a, b, 0);
+		else if (data.tri_left == 1)
+			pass_tri_left1(&data, a, b, 0);
 		else
 			pass_tri(&data, a, b, 0);
 		merge_tri(&data, a, b, 0);
-		tri++;
 	}
 }
 
@@ -108,11 +111,11 @@ int	compare_num(t_stack *a, t_stack *b, int top, t_info *data)
 		temp = b->data[b->rear];
 	if (data->bt_num > 0 && temp < b->data[b->front] && b->data[b->front] < top)
 		temp = b->data[b->front];
-	if (temp == a->data[a->rear])
+	if (temp == a->data[a->rear] && data->ab_num > 0)
 		return (ABOT);
-	else if (temp == b->data[b->rear])
+	else if (temp == b->data[b->rear] && data->bb_num > 0)
 		return (BBOT);
-	else if (temp == b->data[b->front])
+	else if (temp == b->data[b->front] && data->bt_num > 0)
 		return (BTOP);
 	return (0);
 }

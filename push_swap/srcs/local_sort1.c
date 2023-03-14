@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 06:29:45 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/05 22:44:45 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/14 21:27:19 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,30 @@ void	local_sort(t_info *data, t_stack *a, t_stack *b)
 	cmd.num[3] = 0;
 	init_num(a, &cmd, a->front, 0);
 	check_command(data, &cmd);
-	if (cmd.bb_cmd < 9)
+	if (cmd.bt_cmd < 7)
 	{
-		local_bbot(a, b, cmd);
-		data->b_bot--;
+		local_btop(a, b, cmd);
+		data->b_top--;
 	}
-	else if (cmd.ab_cmd < cmd.bt_cmd && cmd.ab_cmd != NONE)
+	else if (cmd.ab_cmd < 7)
 	{
 		local_abot(a, b, cmd);
 		data->a_bot--;
+	}
+	else if (cmd.bb_cmd < 9)
+	{
+		local_bbot(a, b, cmd);
+		data->b_bot--;
 	}
 	else if (cmd.ab_cmd >= cmd.bt_cmd && cmd.bt_cmd != NONE)
 	{
 		local_btop(a, b, cmd);
 		data->b_top--;
+	}
+	else if (cmd.ab_cmd < cmd.bt_cmd && cmd.ab_cmd != NONE)
+	{
+		local_abot(a, b, cmd);
+		data->a_bot--;
 	}
 	else
 	{

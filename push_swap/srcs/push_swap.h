@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 19:47:09 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/03 21:10:08 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:25:30 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int		new_max(t_stack *a, t_stack *b, int temp, t_info *data);
 int		find_tri(t_info *data, t_stack *a);
 void	pass_tri_2(t_info *data, t_stack *a, t_stack *b, int next);
 void	pass_tri(t_info *data, t_stack *a, t_stack *b, int i);
+void	pass_tri_left(t_info *data, t_stack *a, t_stack *b, int i);
+void	pass_tri_left1(t_info *data, t_stack *a, t_stack *b, int next);
 
 //single_sort
 void	single_sort(t_stack *a, t_stack *b, int size);

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:27:30 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/14 22:33:57 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/17 22:43:17 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,13 @@ void	merge_tri(t_info *data, t_stack *a, t_stack *b, int result)
 			p_command(PA, a, b);
 			data->bt_num--;
 		}
+		else if (result == RRAB && data->ab_num > 0 && data->bb_num > 0)
+		{
+			d_command(RRR, a, b);
+			data->ab_num--;
+			p_command(PA, a, b);
+			data->bb_num--;
+		}
 		else
 			break ;
 		result = compare_num(a, b, a->data[a->front], data);
@@ -112,7 +119,7 @@ int	compare_num(t_stack *a, t_stack *b, int top, t_info *data)
 	if (data->bt_num > 0 && temp < b->data[b->front] && b->data[b->front] < top)
 		temp = b->data[b->front];
 	if (temp == a->data[a->rear] && data->ab_num > 0)
-		return (ABOT);
+		return (check_rrr(a, b, a->data[a->front], data));
 	else if (temp == b->data[b->rear] && data->bb_num > 0)
 		return (BBOT);
 	else if (temp == b->data[b->front] && data->bt_num > 0)
@@ -135,10 +142,27 @@ int	new_max(t_stack *a, t_stack *b, int temp, t_info *data)
 	if (data->bt_num > 0 && temp < b->data[b->front])
 		temp = b->data[b->front];
 	if (data->ab_num > 0 && temp == a->data[a->rear])
-		return (ABOT);
+		return (check_rrr(a, b, b->data[b->rear] + 1, data));
 	else if (data->bb_num > 0 && temp == b->data[b->rear])
 		return (BBOT);
 	else if (data->bt_num > 0 && temp == b->data[b->front])
 		return (BTOP);
 	return (0);
+}
+
+int	check_rrr(t_stack *a, t_stack *b, int top, t_info *data)
+{
+	int	next;
+
+	next = (a->rear + 1 + a->size) % a->size;
+	if (data->bb_num > 0 && b->data[b->rear] < top)
+	{
+		if (data->bt_num > 0 && b->data[b->rear] < b->data[b->front])
+			return (ABOT);
+		if (data->ab_num > 1 && b->data[b->rear] < a->data[next])
+			return (ABOT);
+		else
+			return (RRAB);
+	}
+	return (ABOT);
 }

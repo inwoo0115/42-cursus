@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 19:47:09 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/14 22:25:30 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/17 22:35:24 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ enum e_tri
 	ABOT = 1,
 	BTOP = 2,
 	BBOT = 3,
+	RRAB = 4,
 	NONE = 100
 };
 
@@ -103,6 +104,7 @@ void	check_tri(t_info *data, t_stack *a);
 void	merge_tri(t_info *data, t_stack *a, t_stack *b, int result);
 int		compare_num(t_stack *a, t_stack *b, int top, t_info *data);
 int		new_max(t_stack *a, t_stack *b, int temp, t_info *data);
+int		check_rrr(t_stack *a, t_stack *b, int top, t_info *data);
 
 //merge_sort
 int		find_tri(t_info *data, t_stack *a);

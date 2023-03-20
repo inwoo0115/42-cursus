@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:27:30 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/17 22:43:17 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/21 05:00:19 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,154 +15,115 @@
 void	ft_sort(t_stack *a, t_stack *b)
 {
 	t_info	data;
-	int		tri;
+	int		size_a;
+	int		size_b;
+	int		min;
 
-	check_tri(&data, a);
-	tri = data.tri;
-	while (tri > 0)
+	init_stack(a, b, a->size, a->data[a->size / 3]);
+	size_a = check_size(a, a->front);
+	while (size_a > 5)
 	{
-		if (data.left && tri == 1)
+		p_command(PB, a, b);
+		size_a--;
+	}
+	single_sort(a, b, size_a);
+	size_b = a->size - size_a;
+	while (size_b)
+	{
+		find_min_cmd(a, b, &data, b->size);
+		cmd_operate(a, b, &data);
+		size_b--;
+	}
+	min = find_min_num(a, a->front, 0);
+	operate_a(a, b, min);
+}
+
+void	find_min_cmd(t_stack *a, t_stack *b, t_info *data, int temp)
+{
+	int	index;
+	int	min;
+	int	count;
+
+	index = b->front;
+	while (1)
+	{
+		check_count_a(a, data, b->data[index], check_size(a, a->front));
+		check_count_b(b, data, index, check_size(b, b->front));
+		count = data->a_num + data->b_num;
+		if (temp > count)
+		{
+			temp = count;
+			min = index;
+		}
+		if (index == b->rear)
 			break ;
-		local_sort(&data, a, b);
-		tri--;
+		index = (index - 1 + b->size) % b->size;
 	}
-	if (data.left && a->size <= 12)
-		single_sort(a, b, data.left);
-	if (data.left && a->size > 12)
-		small_sort(a, b, data.left);
-	merge_tri(&data, a, b, 0);
-	while (find_tri(&data, a) > 1)
-	{
-		if (data.tri == 2)
-			pass_tri_2(&data, a, b, 0);
-		else if (data.tri_left == 2)
-			pass_tri_left(&data, a, b, 0);
-		else if (data.tri_left == 1)
-			pass_tri_left1(&data, a, b, 0);
-		else
-			pass_tri(&data, a, b, 0);
-		merge_tri(&data, a, b, 0);
-	}
+	check_count_a(a, data, b->data[min], check_size(a, a->front));
+	check_count_b(b, data, min, check_size(b, b->front));
 }
 
-void	check_tri(t_info *data, t_stack *a)
+void	check_count_a(t_stack *a, t_info *data, int val, int size)
 {
-	data->left = a->size % 4;
-	data->tri = a->size / 4;
-	if (data->left)
-		data->tri++;
-	data->tri_left = data->tri % 3;
-	data->b_top = data->tri / 3;
-	data->b_bot = data->tri / 3;
-	data->a_bot = data->tri / 3;
-	if (data->tri_left >= 1)
-		data->a_bot++;
-	if (data->tri_left >= 2)
-		data->b_top++;
-	data->bt_num = data->b_top * 4;
-	data->bb_num = data->b_bot * 4;
-	data->ab_num = a->size - data->bt_num - data->bb_num;
-}
+	int	curr;
+	int	cmp_1;
+	int	cmp_2;
+	int	i;
 
-void	merge_tri(t_info *data, t_stack *a, t_stack *b, int result)
-{
-	result = new_max(a, b, 0, data);
-	while (data->ab_num > 0 || data->bb_num > 0 || data->bt_num > 0)
+	i = 1;
+	curr = a->front;
+	while (curr != a->rear)
 	{
-		if (result == ABOT && data->ab_num > 0)
-		{
-			r_command(RRA, a, b);
-			data->ab_num--;
-		}
-		else if (result == BBOT && data->bb_num > 0)
-		{
-			r_command(RRB, a, b);
-			p_command(PA, a, b);
-			data->bb_num--;
-		}
-		else if (result == BTOP && data->bt_num > 0)
-		{
-			p_command(PA, a, b);
-			data->bt_num--;
-		}
-		else if (result == RRAB && data->ab_num > 0 && data->bb_num > 0)
-		{
-			d_command(RRR, a, b);
-			data->ab_num--;
-			p_command(PA, a, b);
-			data->bb_num--;
-		}
-		else
+		cmp_1 = val - a->data[curr];
+		cmp_2 = val - a->data[(curr - 1 + a->size) % a->size];
+		if (((cmp_1 * cmp_2) > 0 && cmp_1 < cmp_2) || (cmp_1 > 0 && cmp_2 < 0))
 			break ;
-		result = compare_num(a, b, a->data[a->front], data);
+		i++;
+		curr = (curr - 1 + a->size) % a->size;
 	}
-}
-
-int	compare_num(t_stack *a, t_stack *b, int top, t_info *data)
-{
-	int		temp;
-
-	if (data->ab_num > 0 && a->data[a->rear] < top)
-		temp = a->data[a->rear];
-	else if (data->bt_num > 0 && b->data[b->front] < top)
-		temp = b->data[b->front];
-	else if (data->bb_num > 0 && b->data[b->rear] < top)
-		temp = b->data[b->rear];
-	else if (data->ab_num > 0 || data->bb_num > 0 || data->bt_num > 0)
-		return (new_max(a, b, 0, data));
+	if (i > size / 2)
+	{
+		i = size - i;
+		data->a_rotate = DOWN;
+	}
 	else
-		return (0);
-	if (data->ab_num > 0 && temp < a->data[a->rear] && a->data[a->rear] < top)
-		temp = a->data[a->rear];
-	if (data->bb_num > 0 && temp < b->data[b->rear] && b->data[b->rear] < top)
-		temp = b->data[b->rear];
-	if (data->bt_num > 0 && temp < b->data[b->front] && b->data[b->front] < top)
-		temp = b->data[b->front];
-	if (temp == a->data[a->rear] && data->ab_num > 0)
-		return (check_rrr(a, b, a->data[a->front], data));
-	else if (temp == b->data[b->rear] && data->bb_num > 0)
-		return (BBOT);
-	else if (temp == b->data[b->front] && data->bt_num > 0)
-		return (BTOP);
-	return (0);
+		data->a_rotate = UP;
+	data->a_num = i;
 }
 
-int	new_max(t_stack *a, t_stack *b, int temp, t_info *data)
+void	check_count_b(t_stack *b, t_info *data, int index, int size)
 {
-	if (data->ab_num > 0)
-		temp = a->data[a->rear];
-	else if (data->bb_num > 0)
-		temp = b->data[b->rear];
-	else if (data->bt_num > 0)
-		temp = b->data[b->front];
-	if (data->ab_num > 0 && temp < a->data[a->rear])
-		temp = a->data[a->rear];
-	if (data->bb_num > 0 && temp < b->data[b->rear])
-		temp = b->data[b->rear];
-	if (data->bt_num > 0 && temp < b->data[b->front])
-		temp = b->data[b->front];
-	if (data->ab_num > 0 && temp == a->data[a->rear])
-		return (check_rrr(a, b, b->data[b->rear] + 1, data));
-	else if (data->bb_num > 0 && temp == b->data[b->rear])
-		return (BBOT);
-	else if (data->bt_num > 0 && temp == b->data[b->front])
-		return (BTOP);
-	return (0);
-}
+	int	curr;
+	int	i;
 
-int	check_rrr(t_stack *a, t_stack *b, int top, t_info *data)
-{
-	int	next;
-
-	next = (a->rear + 1 + a->size) % a->size;
-	if (data->bb_num > 0 && b->data[b->rear] < top)
+	i = 0;
+	curr = b->front;
+	while (curr != index)
 	{
-		if (data->bt_num > 0 && b->data[b->rear] < b->data[b->front])
-			return (ABOT);
-		if (data->ab_num > 1 && b->data[b->rear] < a->data[next])
-			return (ABOT);
-		else
-			return (RRAB);
+		i++;
+		curr = (curr - 1 + b->size) % b->size;
 	}
-	return (ABOT);
+	if (i < size / 2)
+	{
+		data->b_num = i;
+		data->b_rotate = UP;
+	}
+	else
+	{
+		data->b_num = size - i;
+		data->b_rotate = DOWN;
+	}
+}
+
+int	check_size(t_stack *a, int i)
+{
+	int	size;
+
+	size = 1;
+	while (i != a->rear)
+	{
+		size++;
+		i = (i - 1 + a->size) % a->size;
+	}
+	return (size);
 }

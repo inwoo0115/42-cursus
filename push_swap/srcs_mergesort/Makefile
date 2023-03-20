@@ -6,7 +6,7 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 23:29:33 by wonjilee          #+#    #+#              #
-#    Updated: 2023/03/21 04:59:47 by wonjilee         ###   ########.fr        #
+#    Updated: 2023/03/19 21:02:08 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,9 @@ NAME_BONUS = checker
 CC = cc
 CFLAG = -Wall -Wextra -Werror
 
-SRCS = ./srcs/arr_utils.c ./srcs/command_print.c ./srcs/command.c ./srcs/ft_sort.c ./srcs/ft_split.c \
-./srcs/push_swap.c ./srcs/single_sort.c ./srcs/command_operate.c ./srcs/init.c
+SRCS = ./srcs/arr_utils.c ./srcs/command_print.c ./srcs/command.c ./srcs/ft_sort.c ./srcs/ft_split.c ./srcs/local_sort1.c \
+./srcs/local_sort2.c ./srcs/local_sort3.c ./srcs/local_sort4.c ./srcs/local_sort5.c ./srcs/merge_sort.c ./srcs/push_swap.c \
+./srcs/single_sort.c ./srcs/small_sort.c ./srcs/merge_sort_init.c
 
 OBJS = $(SRCS:.c=.o)
 

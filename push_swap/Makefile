@@ -6,7 +6,7 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 23:29:33 by wonjilee          #+#    #+#              #
-#    Updated: 2023/03/21 04:59:47 by wonjilee         ###   ########.fr        #
+#    Updated: 2023/03/25 23:46:35 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,10 @@ CFLAG = -Wall -Wextra -Werror
 
 SRCS = ./srcs/arr_utils.c ./srcs/command_print.c ./srcs/command.c ./srcs/ft_sort.c ./srcs/ft_split.c \
 ./srcs/push_swap.c ./srcs/single_sort.c ./srcs/command_operate.c ./srcs/init.c
+
+SRCS_BONUS = ./bonus/arr_utils_bonus.c ./bonus/checker_bonus.c ./bonus/command_bonus.c \
+./bonus/command_print_bonus.c ./bonus/get_next_line_bonus.c ./bonus/get_next_line_utils_bonus.c \
+./bonus/ft_split_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 

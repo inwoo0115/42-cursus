@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 17:43:13 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/20 23:59:07 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/25 22:50:55 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	main(int argc, char *argv[])
 	t_stack	a;
 	t_stack	b;
 
+	if (argc <= 1)
+		return (0);
 	make_stack(&a, argc, argv);
 	check_arr(&a);
 	b.size = a.size;

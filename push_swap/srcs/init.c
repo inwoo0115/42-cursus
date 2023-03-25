@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 01:01:28 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/21 05:00:18 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/25 21:51:27 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_stack(t_stack *a, t_stack *b, int size, int p1)
 {
 	int		p2;
 
-	p2 = a->data[(a->size / 3) * 2];
+	p2 = find_pivot(a, a->size / 3 * 2, a->front);
 	while (size > 0)
 	{
 		if (a->data[a->front] <= p1)
@@ -39,4 +39,39 @@ void	init_stack(t_stack *a, t_stack *b, int size, int p1)
 			r_command(RA, a, b);
 		size--;
 	}
+}
+
+int	find_pivot(t_stack *a, int index, int i)
+{
+	int	j;
+	int	num;
+
+	while (i != a->rear)
+	{
+		num = 0;
+		j = a->front;
+		while (j != a->rear)
+		{
+			if (a->data[i] > a->data[j])
+				num++;
+			j = (j - 1 + a->size) % a->size;
+		}
+		if (num == index)
+			return (a->data[i]);
+		i = (i - 1 + a->size) % a->size;
+	}
+	return (0);
+}
+
+int	check_size(t_stack *a, int i)
+{
+	int	size;
+
+	size = 1;
+	while (i != a->rear)
+	{
+		size++;
+		i = (i - 1 + a->size) % a->size;
+	}
+	return (size);
 }

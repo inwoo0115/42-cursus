@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 17:43:13 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/20 22:46:33 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/03/25 22:29:23 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/03/25 23:42:23 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 int	free_res(t_stack *a, t_stack *b)
 {
@@ -21,18 +21,41 @@ int	free_res(t_stack *a, t_stack *b)
 	return (0);
 }
 
-int	check_sort(t_stack *a)
+int	check_sort(t_stack *a, t_stack *b, int i)
 {
-	int	i;
+	int	next;
 
-	i = 0;
-	while (i < a->front)
+	while (i != a->rear)
 	{
-		if (a->data[i] < a->data[i + 1])
-			return (1);
-		i++;
+		next = (i - 1 + a->size) % a->size;
+		if (a->data[i] > a->data[next])
+			return (KO);
+		i = next;
 	}
-	return (0);
+	if (b->front != -1 || b->rear != -1)
+		return (KO);
+	return (OK);
+}
+
+void	print_result(int result)
+{
+	if (result == OK)
+		write(1, "OK", 2);
+	if (result == KO)
+		write(1, "KO", 2);
+}
+
+void	get_command(t_stack *a, t_stack *b)
+{
+	char	*str;
+
+	str = get_next_line(0);
+	while (str)
+	{
+		cmd_operate(command_check(str), a, b);
+		str = get_next_line(0);
+	}
+	free(str);
 }
 
 int	main(int argc, char *argv[])
@@ -51,11 +74,7 @@ int	main(int argc, char *argv[])
 		ft_error(&a);
 		return (0);
 	}
-	if (a.size == 1 || !check_sort(&a))
-		return (free_res(&a, &b));
-	if (a.size <= 5)
-		single_sort(&a, &b, a.size);
-	else if (a.size > 5)
-		ft_sort(&a, &b);
+	get_command(&a, &b);
+	print_result(check_sort(&a, &b, a.front));
 	return (free_res(&a, &b));
 }

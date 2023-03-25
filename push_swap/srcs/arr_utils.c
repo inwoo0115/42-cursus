@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:57:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/05 20:14:59 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/25 22:47:13 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	make_stack(t_stack *a, int argc, char *argv[])
 	a->rear = 0;
 	a->front = a->size - 1;
 	make_arr(a, argc, argv, 1);
-	check_arr(a);
 }
 
 void	make_arr(t_stack *a, int argc, char *argv[], int idx)

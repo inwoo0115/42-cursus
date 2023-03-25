@@ -1,67 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_print.c                                    :+:      :+:    :+:   */
+/*   command_print_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:12:31 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/17 21:39:30 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/25 23:46:35 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
-void	p_command(int order, t_stack *a, t_stack *b)
+int	command_check(char	*str)
+{
+	if (str[0] == 'p' && str[1] == 'a')
+		return (PA);
+	else if (str[0] == 'p' && str[1] == 'b')
+		return (PB);
+	else if (str[0] == 's' && str[1] == 'a')
+		return (SA);
+	else if (str[0] == 's' && str[1] == 'b')
+		return (SB);
+	else if (str[0] == 'r' && str[1] == 'a')
+		return (RA);
+	else if (str[0] == 'r' && str[1] == 'b')
+		return (RB);
+	else if (str[0] == 'r' && str[1] == 'r' && str[2] == 'a')
+		return (RRA);
+	else if (str[0] == 'r' && str[1] == 'r' && str[2] == 'b')
+		return (RRB);
+	else if (str[0] == 'r' && str[1] == 'r' && str[2] == 'r')
+		return (RRR);
+	else if (str[0] == 'r' && str[1] == 'r' && str[2] == '\n')
+		return (RR);
+	else if (str[0] == 's' && str[1] == 's' && str[2] == '\n')
+		return (SS);
+	return (-1);
+}
+
+void	cmd_operate(int order, t_stack *a, t_stack *b)
 {
 	if (order == PA)
-	{
 		push(b, a);
-		write(1, "pa\n", 3);
-	}
 	else if (order == PB)
-	{
 		push(a, b);
-		write(1, "pb\n", 3);
-	}
-}
-
-void	s_command(int order, t_stack *a, t_stack *b)
-{
-	if (order == SA)
-	{
+	else if (order == SA)
 		swap(a);
-		write(1, "sa\n", 3);
-	}
 	else if (order == SB)
-	{
 		swap(b);
-		write(1, "sb\n", 3);
-	}
-}
-
-void	r_command(int order, t_stack *a, t_stack *b)
-{
-	if (order == RA)
-	{
+	else if (order == RA)
 		rotate(a);
-		write(1, "ra\n", 3);
-	}
 	else if (order == RB)
-	{
 		rotate(b);
-		write(1, "rb\n", 3);
-	}
 	else if (order == RRA)
-	{
 		re_rotate(a);
-		write(1, "rra\n", 4);
-	}
 	else if (order == RRB)
-	{
 		re_rotate(b);
-		write(1, "rrb\n", 4);
-	}
+	else
+		d_command(order, a, b);
 }
 
 void	d_command(int order, t_stack *a, t_stack *b)
@@ -70,18 +67,20 @@ void	d_command(int order, t_stack *a, t_stack *b)
 	{
 		swap(a);
 		swap(b);
-		write(1, "ss\n", 3);
 	}
 	else if (order == RR)
 	{
 		rotate(a);
 		rotate(b);
-		write(1, "rr\n", 3);
 	}
 	else if (order == RRR)
 	{
 		re_rotate(a);
 		re_rotate(b);
-		write(1, "rrr\n", 4);
+	}
+	else
+	{
+		free(b->data);
+		ft_error(a);
 	}
 }

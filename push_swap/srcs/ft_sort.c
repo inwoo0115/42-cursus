@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:27:30 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/21 05:00:19 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/25 21:51:27 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_sort(t_stack *a, t_stack *b)
 	int		size_b;
 	int		min;
 
-	init_stack(a, b, a->size, a->data[a->size / 3]);
+	init_stack(a, b, a->size, find_pivot(a, a->size / 3, a->front));
 	size_a = check_size(a, a->front);
 	while (size_a > 5)
 	{
@@ -49,6 +49,10 @@ void	find_min_cmd(t_stack *a, t_stack *b, t_info *data, int temp)
 	{
 		check_count_a(a, data, b->data[index], check_size(a, a->front));
 		check_count_b(b, data, index, check_size(b, b->front));
+		if (data->a_rotate == data->b_rotate && data->a_num <= data->b_num)
+			data->a_num = 0;
+		else if (data->a_rotate == data->b_rotate && data->a_num > data->b_num)
+			data->b_num = 0;
 		count = data->a_num + data->b_num;
 		if (temp > count)
 		{
@@ -66,17 +70,13 @@ void	find_min_cmd(t_stack *a, t_stack *b, t_info *data, int temp)
 void	check_count_a(t_stack *a, t_info *data, int val, int size)
 {
 	int	curr;
-	int	cmp_1;
-	int	cmp_2;
 	int	i;
 
 	i = 1;
 	curr = a->front;
 	while (curr != a->rear)
 	{
-		cmp_1 = val - a->data[curr];
-		cmp_2 = val - a->data[(curr - 1 + a->size) % a->size];
-		if (((cmp_1 * cmp_2) > 0 && cmp_1 < cmp_2) || (cmp_1 > 0 && cmp_2 < 0))
+		if (find_index_a(a, val, curr))
 			break ;
 		i++;
 		curr = (curr - 1 + a->size) % a->size;
@@ -89,6 +89,23 @@ void	check_count_a(t_stack *a, t_info *data, int val, int size)
 	else
 		data->a_rotate = UP;
 	data->a_num = i;
+}
+
+int	find_index_a(t_stack *a, int val, int curr)
+{
+	int	next;
+
+	next = (curr - 1 + a->size) % a->size;
+	if (val < a->data[next] && val > a->data[curr])
+		return (1);
+	else if (a->data[next] < a->data[curr])
+	{
+		if (val < a->data[next] && val < a->data[curr])
+			return (1);
+		if (val > a->data[next] && val > a->data[curr])
+			return (1);
+	}
+	return (0);
 }
 
 void	check_count_b(t_stack *b, t_info *data, int index, int size)
@@ -113,17 +130,4 @@ void	check_count_b(t_stack *b, t_info *data, int index, int size)
 		data->b_num = size - i;
 		data->b_rotate = DOWN;
 	}
-}
-
-int	check_size(t_stack *a, int i)
-{
-	int	size;
-
-	size = 1;
-	while (i != a->rear)
-	{
-		size++;
-		i = (i - 1 + a->size) % a->size;
-	}
-	return (size);
 }

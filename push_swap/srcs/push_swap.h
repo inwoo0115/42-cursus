@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 19:47:09 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/21 05:02:57 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/25 22:53:12 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_sort(t_stack *a, t_stack *b);
 void	find_min_cmd(t_stack *a, t_stack *b, t_info *data, int temp);
 void	check_count_a(t_stack *a, t_info *data, int val, int size);
 void	check_count_b(t_stack *b, t_info *data, int index, int size);
-int		check_size(t_stack *a, int i);
+int		find_index_a(t_stack *a, int val, int curr);
 
 //command_operate
 void	cmd_operate(t_stack *a, t_stack *b, t_info *data);
@@ -93,6 +93,8 @@ void	operate_a(t_stack *a, t_stack *b, int min);
 
 //init
 void	init_stack(t_stack *a, t_stack *b, int size, int p1);
+int		check_size(t_stack *a, int i);
+int		find_pivot(t_stack *a, int index, int i);
 
 //single_sort
 void	single_sort(t_stack *a, t_stack *b, int size);

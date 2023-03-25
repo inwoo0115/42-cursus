@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:21:38 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/25 23:27:49 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/26 00:03:18 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ size_t	ft_strlen(char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+char	*error_return(int *error)
+{
+	*error = 0;
+	return (0);
 }
 
 int	check_newline(char *str, t_list *data, int i, int j)

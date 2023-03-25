@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 22:29:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/25 23:44:22 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/26 00:03:35 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ typedef struct s_list
 	char			buff[5];
 }	t_list;
 
+//checker
+int		free_res(t_stack *a, t_stack *b);
+int		check_sort(t_stack *a, t_stack *b, int i);
+void	print_result(int result);
+void	get_command(t_stack *a, t_stack *b);
+
 //arr_utils
 void	make_stack(t_stack *a, int argc, char *argv[]);
 void	make_arr(t_stack *a, int argc, char *argv[], int idx);
@@ -67,13 +73,14 @@ void	d_command(int order, t_stack *a, t_stack *b);
 int		command_check(char	*str);
 
 //get_next_line
-char	*get_next_line(int fd);
+char	*get_next_line(int *error);
 char	*make_line(char	*str);
-char	*get_newline(int fd, char *buff, t_list *data, int len);
+char	*get_newline(int *error, char *buff, t_list *data, int len);
 char	*find_data(t_list *data, int i);
 char	*ft_strjoin(char *s1, char *s2);
 int		check_newline(char *str, t_list *data, int i, int j);
 size_t	ft_strlen(char *s);
+char	*error_return(int *error);
 
 //ft_split
 char	**make_split(char const *s, char c, char **split_word);

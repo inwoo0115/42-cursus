@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 22:29:23 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/25 23:42:23 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/25 23:59:56 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,21 @@ void	print_result(int result)
 void	get_command(t_stack *a, t_stack *b)
 {
 	char	*str;
+	int		error;
 
-	str = get_next_line(0);
+	error = 1;
+	str = get_next_line(&error);
 	while (str)
 	{
 		cmd_operate(command_check(str), a, b);
-		str = get_next_line(0);
+		str = get_next_line(&error);
 	}
 	free(str);
+	if (error == 0)
+	{
+		free(b->data);
+		ft_error(a);
+	}
 }
 
 int	main(int argc, char *argv[])

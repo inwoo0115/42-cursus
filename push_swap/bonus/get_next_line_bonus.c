@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:42:51 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/25 23:32:31 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/03/26 00:03:26 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ char	*find_data(t_list *data, int i)
 	return (temp);
 }
 
-char	*get_newline(int fd, char *buff, t_list *data, int len)
+char	*get_newline(int *error, char *buff, t_list *data, int len)
 {
 	char	*temp;
 
 	temp = find_data(data, 0);
 	if (!temp)
-		return (0);
+		return (error_return(error));
 	if (check_newline(temp, data, 0, 0))
 		return (temp);
-	len = read(fd, buff, 5);
+	len = read(0, buff, 5);
 	if (len < 0)
 	{
 		free(temp);
@@ -61,10 +61,10 @@ char	*get_newline(int fd, char *buff, t_list *data, int len)
 		buff[len] = '\0';
 		temp = ft_strjoin(temp, buff);
 		if (!temp)
-			return (0);
+			return (error_return(error));
 		if (check_newline(buff, data, 0, 0))
 			break ;
-		len = read(fd, buff, 5);
+		len = read(0, buff, 5);
 	}
 	return (temp);
 }
@@ -98,7 +98,7 @@ char	*make_line(char	*str)
 	return (temp);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int *error)
 {
 	static t_list	data = {0, -1, 0, "\0"};
 	char			*buff;
@@ -106,8 +106,8 @@ char	*get_next_line(int fd)
 
 	buff = (char *)malloc(5);
 	if (!(buff))
-		return (0);
-	str = get_newline(fd, buff, &data, 1);
+		return (error_return(error));
+	str = get_newline(error, buff, &data, 1);
 	free(buff);
 	buff = 0;
 	if (str == 0 || str[0] == '\0')

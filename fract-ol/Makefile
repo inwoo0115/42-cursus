@@ -5,22 +5,18 @@
 #                                                     +:+ +:+         +:+      #
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/24 23:29:33 by wonjilee          #+#    #+#              #
-#    Updated: 2023/04/01 22:11:38 by wonjilee         ###   ########.fr        #
+#    Created: 2023/03/26 00:14:10 by wonjilee          #+#    #+#              #
+#    Updated: 2023/03/26 00:15:50 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := push_swap
-NAME_BONUS := checker
+NAME := fractol
 CC = cc
 CFLAG = -Wall -Wextra -Werror
 
-SRCS = ./srcs/arr_utils.c ./srcs/command_print.c ./srcs/command.c ./srcs/ft_sort.c ./srcs/ft_split.c \
-./srcs/push_swap.c ./srcs/single_sort.c ./srcs/command_operate.c ./srcs/init.c
+SRCS = 
 
-SRCS_BONUS = ./bonus/arr_utils_bonus.c ./bonus/checker_bonus.c ./bonus/command_bonus.c \
-./bonus/command_print_bonus.c ./bonus/get_next_line_bonus.c ./bonus/get_next_line_utils_bonus.c \
-./bonus/ft_split_bonus.c
+SRCS_BONUS = 
 
 OBJS = $(SRCS:.c=.o)
 
@@ -31,7 +27,7 @@ all : $(NAME)
 bonus : $(NAME) $(NAME_BONUS)
 
 %.o : %.c
-		$(CC) $(CFLAG) -c $< -o $@ -I ./srcs -I ./bonus
+		$(CC) $(CFLAG) -c $< -o $@ -I ./srcs
 
 clean :
 		rm -f $(OBJS) $(OBJS_BONUS)
@@ -44,9 +40,9 @@ re :
 		make all
 
 $(NAME): $(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) -o $@
+		$(CC) $(CFLAGS) $? -o $@
 
 $(NAME_BONUS): $(OBJS_BONUS)
-		$(CC) $(CFLAGS) $(OBJS_BONUS) -o $@
+		$(CC) $(CFLAGS) $? -o $@
 
 .PHONY: all clean fclean re bonus

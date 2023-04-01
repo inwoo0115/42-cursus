@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 22:13:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/25 23:44:23 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/01 21:29:28 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ int	num_letter(char const *s, char c, int i)
 	int	num;
 
 	num = 0;
-	while (s[i] && s[i] != c)
+	while (s[i])
 	{
-		num++;
+		if (s[i] != c)
+			num++;
 		i++;
 	}
 	return (num);

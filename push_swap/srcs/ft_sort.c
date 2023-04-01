@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:27:30 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/25 21:51:27 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/01 21:04:01 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	find_min_cmd(t_stack *a, t_stack *b, t_info *data, int temp)
 	{
 		check_count_a(a, data, b->data[index], check_size(a, a->front));
 		check_count_b(b, data, index, check_size(b, b->front));
-		if (data->a_rotate == data->b_rotate && data->a_num <= data->b_num)
-			data->a_num = 0;
-		else if (data->a_rotate == data->b_rotate && data->a_num > data->b_num)
-			data->b_num = 0;
 		count = data->a_num + data->b_num;
+		if (data->a_rotate == data->b_rotate && data->a_num <= data->b_num)
+			count = count - data->a_num;
+		else if (data->a_rotate == data->b_rotate && data->a_num > data->b_num)
+			count = count - data->b_num;
 		if (temp > count)
 		{
 			temp = count;

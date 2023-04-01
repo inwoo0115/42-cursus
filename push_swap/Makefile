@@ -6,7 +6,7 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 23:29:33 by wonjilee          #+#    #+#              #
-#    Updated: 2023/04/01 20:49:02 by wonjilee         ###   ########.fr        #
+#    Updated: 2023/04/01 21:37:43 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,9 +44,9 @@ re :
 		make all
 
 $(NAME): $(OBJS)
-		$(CC) $(CFLAGS) $? -o $@
+		$(CC) $(CFLAGS) $(OBJS) -o $@
 
 $(NAME_BONUS): $(OBJS_BONUS)
-		$(CC) $(CFLAGS) $? -o $@
+		$(CC) $(CFLAGS) $(OBJS_BONUS) -o $@
 
 .PHONY: all clean fclean re bonus

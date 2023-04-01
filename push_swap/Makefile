@@ -6,12 +6,12 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 23:29:33 by wonjilee          #+#    #+#              #
-#    Updated: 2023/03/26 00:13:44 by wonjilee         ###   ########.fr        #
+#    Updated: 2023/04/01 20:49:02 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := push_swap
-NAME_BONUS = checker
+NAME_BONUS := checker
 CC = cc
 CFLAG = -Wall -Wextra -Werror
 
@@ -31,7 +31,7 @@ all : $(NAME)
 bonus : $(NAME) $(NAME_BONUS)
 
 %.o : %.c
-		$(CC) $(CFLAG) -c $< -o $@ -I ./srcs
+		$(CC) $(CFLAG) -c $< -o $@ -I ./srcs -I ./bonus
 
 clean :
 		rm -f $(OBJS) $(OBJS_BONUS)

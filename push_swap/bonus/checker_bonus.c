@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 22:29:23 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/25 23:59:56 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/01 20:34:19 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	check_sort(t_stack *a, t_stack *b, int i)
 void	print_result(int result)
 {
 	if (result == OK)
-		write(1, "OK", 2);
+		write(1, "OK\n", 3);
 	if (result == KO)
-		write(1, "KO", 2);
+		write(1, "KO\n", 3);
 }
 
 void	get_command(t_stack *a, t_stack *b)
@@ -55,6 +55,7 @@ void	get_command(t_stack *a, t_stack *b)
 	while (str)
 	{
 		cmd_operate(command_check(str), a, b);
+		free(str);
 		str = get_next_line(&error);
 	}
 	free(str);

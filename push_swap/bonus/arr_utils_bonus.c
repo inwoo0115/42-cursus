@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:57:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/25 23:11:52 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/01 20:24:37 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	check_arr(t_stack *a)
 	int	j;
 
 	i = 0;
+	if (!a->size)
+		ft_error(a);
 	while (i < a->front)
 	{
 		j = i + 1;

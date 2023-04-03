@@ -6,7 +6,7 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/26 00:14:10 by wonjilee          #+#    #+#              #
-#    Updated: 2023/03/26 00:15:50 by wonjilee         ###   ########.fr        #
+#    Updated: 2023/04/03 22:36:20 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := fractol
 CC = cc
 CFLAG = -Wall -Wextra -Werror
 
-SRCS = 
+SRCS = ./src/fractol.c ./src/put_image.c ./src/set_hook.c
 
 SRCS_BONUS = 
 
@@ -27,7 +27,7 @@ all : $(NAME)
 bonus : $(NAME) $(NAME_BONUS)
 
 %.o : %.c
-		$(CC) $(CFLAG) -c $< -o $@ -I ./srcs
+		$(CC) $(CFLAG) -Imlx -c $< -o $@ -I ./srcs
 
 clean :
 		rm -f $(OBJS) $(OBJS_BONUS)
@@ -40,9 +40,9 @@ re :
 		make all
 
 $(NAME): $(OBJS)
-		$(CC) $(CFLAGS) $? -o $@
+		$(CC) $(CFLAG) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
 
 $(NAME_BONUS): $(OBJS_BONUS)
-		$(CC) $(CFLAGS) $? -o $@
+		$(CC) $(CFLAG) $(OBJS_BONUS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
 
 .PHONY: all clean fclean re bonus

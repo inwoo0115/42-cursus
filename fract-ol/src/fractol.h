@@ -6,12 +6,13 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 00:16:41 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/03/26 00:17:21 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:55:46 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+# include "../mlx/mlx.h"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 00:17:28 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/03 22:57:38 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:05:17 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int	main(int argc, char *argv[])
 	&img.line_len, &img.endian);
 	ft_set_hook(&img);
 	ft_put_image(&img);
+	mlx_loop_hook(img.mlx, ft_put_image, &img);
 	mlx_loop(img.mlx);
-	exit(0);
 }

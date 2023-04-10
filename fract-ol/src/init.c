@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:08:48 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/03 22:36:31 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:10:15 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_data(int argc, char *argv[], t_data *img)
 {
-	if (argc <= 1 || !check_type(argc, argv, img))
+	if (argc <= 1 && !argv)
 	{
 		printf("Please input right argument\n");
 		printf("1. mandelbrot\n");
@@ -24,9 +24,9 @@ void	init_data(int argc, char *argv[], t_data *img)
 	}
 	img->midx = 500.0;
 	img->midy = 500.0;
-	img->scale = 250;
+	img->scale = 3.0;
 }
-
+// || !check_type(argc, argv, img)
 int	check_type(int argc, char *argv[], t_data *img)
 {
 	if (parsing_type(argv, "mandelbrot"))
@@ -62,6 +62,31 @@ int	parsing_type(char *argv[], char *type)
 	return (1);
 }
 
-double	check_num(char	*num)
+double	check_num(char	*str)
 {
+	long long	sign_fraction;
+	double		decimal;
+
+	sign_fraction = 10;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign_fraction = -10;
+		str++;
+	}
+	if (*str == '0')
+		str++;
+	else
+		return (100.0);
+	if (*str != '.')
+		return (0.0);
+	decimal = 0;
+	str++;
+	while (*str >= '0' && *str <= '9')
+	{
+		decimal += (double)(*str - '0') / sign_fraction;
+		sign_fraction *= 10;
+		str++;
+	}
+	return (decimal);
 }

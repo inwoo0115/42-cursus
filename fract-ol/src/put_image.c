@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:42:30 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/03 22:37:13 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:26:52 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,44 @@ void	pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	ft_put_image(t_data *img)
+int	put_color(int i)
+{
+	if (i >= 85)
+		return (0x00FFFF00);
+	else if (i >= 65)
+		return (0x00FFF000);
+	else if (i >= 30)
+		return (0x00FF0000);
+	return (0);
+}
+
+int	ft_put_image(t_data *img)
 {
 	double	x;
 	double	y;
+	int		color;
 
 	x = 0.0;
-	y = 0.0;
 	while (x < 1000)
 	{
-		y = 0;
+		y = 0.0;
 		while (y < 1000)
 		{
-			if (ft_mandelbrot(img, (x - img.midx) / img.scale, \
-			(y - img.midy) / img.scale))
-				pixel_put(img, x, y, 0x00FF0000);
+			color = ft_mandelbrot((x - img->midx) * (img->scale / 1000), \
+			(y - img->midy) * (img->scale / 1000));
+			if (color)
+				pixel_put(img, x, y, put_color(color));
+			else
+				pixel_put(img, x, y, 0x00FFFFFF);
 			y++;
 		}
 		x++;
 	}
 	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
+	return (0);
 }
 
-void	ft_mandelbrot(t_data *img, double a, double b)
+int	ft_mandelbrot(double a, double b)
 {
 	double	tmpx;
 	double	x;
@@ -52,14 +67,12 @@ void	ft_mandelbrot(t_data *img, double a, double b)
 	x = 0.0;
 	y = 0.0;
 	i = 0;
-	while (i < 1000 && x * x + y * y <= 2 * 2)
+	while (i < 100 && x * x + y * y <= 2 * 2)
 	{
 		tmpx = x;
 		x = x * x - y * y + a;
 		y = 2.0 * tmpx * y + b;
 		i++;
 	}
-	if (i == 1000)
-		return (1);
-	return (0);
+	return (i);
 }

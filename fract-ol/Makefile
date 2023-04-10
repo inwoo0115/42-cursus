@@ -6,15 +6,15 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/26 00:14:10 by wonjilee          #+#    #+#              #
-#    Updated: 2023/04/03 22:36:20 by wonjilee         ###   ########.fr        #
+#    Updated: 2023/04/10 20:33:53 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := fractol
 CC = cc
-CFLAG = -Wall -Wextra -Werror
+CFLAG = -Wall -Wextra -Werror -o3
 
-SRCS = ./src/fractol.c ./src/put_image.c ./src/set_hook.c
+SRCS = ./src/fractol.c ./src/put_image.c ./src/set_hook.c ./src/init.c
 
 SRCS_BONUS = 
 

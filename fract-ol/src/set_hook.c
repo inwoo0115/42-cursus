@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:47:06 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/03 22:57:38 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:16:11 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,49 @@ void	ft_set_hook(t_data *img)
 int	ft_key_handler(int keycode, t_data *img)
 {
 	if (keycode == ESC)
-	{
 		exit(0);
-	}
 	else if (keycode == UP)
+		img->midy -= 10.0;
 	else if (keycode == DOWN)
+		img->midy += 10.0;
 	else if (keycode == LEFT)
+		img->midx += 10.0;
 	else if (keycode == RIGHT)
+		img->midx -= 10.0;
 	else
 		return (0);
-	print_img(img);
 	return (0);
 }
 
-int	ft_mouse_handler(int keycode, t_data *img)
+int	ft_mouse_handler(int keycode, int x, int y, t_data *img)
 {
-	if (keycode == MUP)
+	img->mx = (double)x;
+	img->my = (double)y;
+	if (keycode == 4)
 	{
-		img->scale = img->scale * 1.1;
+		img->scale = img->scale * 1.05;
+		change_scale(MUP, img);
 	}
-	else if (keycode == MDOWN)
+	else if (keycode == 5)
 	{
-		img->scale = img->scale * 0.9;
+		img->scale = img->scale * 0.95;
+		change_scale(MDOWN, img);
 	}
 	else
 		return (0);
-	ft_put_image(img);
 	return (0);
 }
 
-void	change_scale(int direct, t_data *img)
+void	change_scale(int keycode, t_data *img)
 {
-	
+	if (keycode == MDOWN)
+	{
+		img->midx = (20.0 * img->midx - img->mx) / (20.0 - 1.0);
+		img->midy = (20.0 * img->midy - img->my) / (20.0 - 1.0);
+	}
+	else if (keycode == MUP)
+	{
+		img->midx = (20.0 * img->midx + img->mx) / (20.0 + 1.0);
+		img->midy = (20.0 * img->midy + img->my) / (20.0 + 1.0);
+	}
 }

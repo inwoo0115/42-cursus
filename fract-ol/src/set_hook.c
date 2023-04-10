@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:47:06 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/10 21:16:11 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:34:06 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ int	ft_mouse_handler(int keycode, int x, int y, t_data *img)
 {
 	img->mx = (double)x;
 	img->my = (double)y;
-	if (keycode == 4)
+	if (keycode == MUP)
 	{
 		img->scale = img->scale * 1.05;
 		change_scale(MUP, img);
 	}
-	else if (keycode == 5)
+	else if (keycode == MDOWN)
 	{
 		img->scale = img->scale * 0.95;
 		change_scale(MDOWN, img);

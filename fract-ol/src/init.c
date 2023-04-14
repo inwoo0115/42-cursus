@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:08:48 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/10 21:54:55 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/14 21:50:43 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	init_data(int argc, char *argv[], t_data *img)
 	img->midx = 500.0;
 	img->midy = 500.0;
 	img->scale = 3.0;
+	img->color = 0;
+	img->type = JULIA;
+	img->rnum = -0.2;
+	img->inum = 0.3;
 }
 // || !check_type(argc, argv, img)
 int	check_type(int argc, char *argv[], t_data *img)

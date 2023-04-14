@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 00:16:41 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/10 21:54:55 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/14 21:54:19 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_data
 	int		line_len;
 	int		endian;
 	int		type;
+	int		color;
 	double	mx;
 	double	my;
 	double	midx;
@@ -49,8 +50,13 @@ enum e_key
 	MUP = 4,
 	MANDEL = 1,
 	JULIA = 2,
-	WIDTH = 1000,
-	HEIGHT = 1000,
+	RED = 12,
+	BLUE = 13,
+	GREEN = 14,
+	RKEY = 15,
+	GKEY = 5,
+	BKEY = 11,
+	ZKEY = 6
 };
 
 //fractol.c
@@ -66,10 +72,14 @@ double	check_num(char	*num);
 void	pixel_put(t_data *data, int x, int y, int color);
 int		ft_put_image(t_data *img);
 int		ft_mandelbrot(double a, double b);
+int		ft_fractol(t_data *img, int type, double x, double y);
+int		put_color(int i, int color);
+int		ft_julia(double x, double y, t_data *img);
 
 //set_hook
 void	ft_set_hook(t_data *img);
 int		ft_key_handler(int keycode, t_data *img);
 int		ft_mouse_handler(int keycode, int x, int y, t_data *img);
 void	change_scale(int keycode, t_data *img);
+
 #endif

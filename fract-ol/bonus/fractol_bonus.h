@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fractol_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 00:16:41 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/16 21:23:58 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:19:04 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef FRACTOL_BONUS_H
+# define FRACTOL_BONUS_H
 
 # include "../mlx/mlx.h"
 # include <stdio.h>
@@ -51,6 +51,7 @@ enum e_key
 	MUP = 4,
 	MANDEL = 1,
 	JULIA = 2,
+	BURN = 3,
 	RED = 12,
 	BLUE = 13,
 	GREEN = 14,
@@ -78,10 +79,12 @@ int		put_color(int i, int color);
 //put_fractol
 int		ft_mandelbrot(double a, double b);
 int		ft_julia(double x, double y, t_data *img);
+int		ft_burningship(double a, double b);
 
 //set_hook
 void	ft_set_hook(t_data *img);
-int		ft_key_handler(int keycode);
+int		ft_key_handler(int keycode, t_data *img);
 int		ft_mouse_handler(int keycode, int x, int y, t_data *img);
+void	change_scale(int keycode, t_data *img);
 
 #endif

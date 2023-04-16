@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_image.c                                        :+:      :+:    :+:   */
+/*   put_image_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:42:30 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/16 21:21:48 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:19:12 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 void	pixel_put(t_data *data, int x, int y, int color)
 {
@@ -67,5 +67,8 @@ int	ft_fractol(t_data *img, int type, double x, double y)
 	if (type == JULIA)
 		color = ft_julia((x - img->midx) * (img->scale / 1000), \
 		(y - img->midy) * (img->scale / 1000), img);
+	if (type == BURN)
+		color = ft_burningship((x - img->midx) * (img->scale / 1000), \
+		(y - img->midy) * (img->scale / 1000));
 	return (color);
 }

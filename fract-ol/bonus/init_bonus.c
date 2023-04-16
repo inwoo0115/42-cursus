@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:08:48 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/16 21:21:27 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:19:08 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 void	init_data(int argc, char *argv[], t_data *img)
 {
@@ -19,6 +19,7 @@ void	init_data(int argc, char *argv[], t_data *img)
 		printf("Please input right argument\n");
 		printf("1. mandelbrot\n");
 		printf("2. julia [real number] [imaginary number]\n");
+		printf("3. burningship\n");
 		exit (0);
 	}
 	img->midx = 500.0;
@@ -41,6 +42,8 @@ int	check_type(int argc, char *argv[], t_data *img)
 		if (img->rnum > 10 || img->inum > 10)
 			return (0);
 	}
+	else if (parsing_type(argv, "burningship"))
+		img->type = BURN;
 	else
 		return (0);
 	return (1);

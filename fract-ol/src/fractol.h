@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 00:16:41 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/16 21:23:58 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:31:47 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,10 @@ typedef struct s_data
 enum e_key
 {
 	ESC = 53,
-	UP = 126,
-	DOWN = 125,
-	LEFT = 123,
-	RIGHT = 124,
 	MDOWN = 5,
 	MUP = 4,
 	MANDEL = 1,
 	JULIA = 2,
-	RED = 12,
-	BLUE = 13,
-	GREEN = 14,
-	RKEY = 15,
-	GKEY = 5,
-	BKEY = 11,
-	ZKEY = 6
 };
 
 //fractol.c

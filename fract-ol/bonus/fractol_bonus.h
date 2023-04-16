@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 00:16:41 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/16 21:19:04 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:31:12 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ enum e_key
 	RKEY = 15,
 	GKEY = 5,
 	BKEY = 11,
-	ZKEY = 6
 };
 
 //fractol.c

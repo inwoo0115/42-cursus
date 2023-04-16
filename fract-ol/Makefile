@@ -6,7 +6,7 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/26 00:14:10 by wonjilee          #+#    #+#              #
-#    Updated: 2023/04/16 21:20:32 by wonjilee         ###   ########.fr        #
+#    Updated: 2023/04/16 21:29:48 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ all : $(NAME)
 bonus : $(NAME)
 
 %.o : %.c
-		$(CC) $(CFLAG) -Imlx -c $< -o $@ -I ./srcs
+		$(CC) $(CFLAG) -Imlx -c $< -o $@ -I ./srcs -I ./bonus
 
 clean :
 		rm -f $(OBJS) $(OBJS_BONUS)

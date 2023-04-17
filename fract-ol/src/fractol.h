@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 00:16:41 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/16 21:45:38 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:07:20 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_error(int error);
 void	init_data(int argc, char *argv[], t_data *img);
 int		check_type(int argc, char *argv[], t_data *img);
 int		parsing_type(char *argv[], char *type);
-double	check_num(char	*num, double sign_fraction, double decimal);
+double	check_num(char	*str, double sign_fraction, double decimal);
 
 //put_image
 void	pixel_put(t_data *data, int x, int y, int color);

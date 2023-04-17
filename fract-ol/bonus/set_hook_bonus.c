@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:47:06 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/16 21:31:48 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:45:30 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	ft_key_handler(int keycode, t_data *img)
 	if (keycode == ESC)
 		exit(0);
 	else if (keycode == UP)
-		img->midy -= 10.0;
-	else if (keycode == DOWN)
 		img->midy += 10.0;
+	else if (keycode == DOWN)
+		img->midy -= 10.0;
 	else if (keycode == LEFT)
-		img->midx -= 10.0;
-	else if (keycode == RIGHT)
 		img->midx += 10.0;
+	else if (keycode == RIGHT)
+		img->midx -= 10.0;
 	else if (keycode == RKEY)
 		img->color = 32 << 16;
 	else if (keycode == GKEY)

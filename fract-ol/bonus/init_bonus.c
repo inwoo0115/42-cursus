@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:08:48 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/16 21:19:08 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:44:04 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	init_data(int argc, char *argv[], t_data *img)
 
 int	check_type(int argc, char *argv[], t_data *img)
 {
-	if (parsing_type(argv, "mandelbrot"))
+	if (parsing_type(argv, "mandelbrot") && argc == 2)
 		img->type = MANDEL;
 	else if (parsing_type(argv, "julia"))
 	{
-		if (argc < 4)
+		if (argc != 4)
 			return (0);
 		img->type = JULIA;
 		img->rnum = check_num(argv[2], 10.0, 0.0);
@@ -42,7 +42,7 @@ int	check_type(int argc, char *argv[], t_data *img)
 		if (img->rnum > 10 || img->inum > 10)
 			return (0);
 	}
-	else if (parsing_type(argv, "burningship"))
+	else if (parsing_type(argv, "burningship") && argc == 2)
 		img->type = BURN;
 	else
 		return (0);

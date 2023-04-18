@@ -6,16 +6,22 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:47:06 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/17 15:56:13 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:51:41 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_bonus.h"
 
+int	ft_exit(void)
+{
+	exit(0);
+}
+
 void	ft_set_hook(t_data *img)
 {
 	mlx_key_hook(img->win, ft_key_handler, img);
 	mlx_mouse_hook(img->win, ft_mouse_handler, img);
+	mlx_hook(img->win, 17, 0, ft_exit, img);
 }
 
 int	ft_key_handler(int keycode, t_data *img)

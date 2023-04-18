@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pipex.h                                         :+:      :+:    :+:   */
+/*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/16 21:44:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/18 21:26:07 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/04/18 20:12:43 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/04/18 21:26:08 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PIPEX_H
-# define FT_PIPEX_H
+#include "ft_pipex.h"
 
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <sys/wait.h>
-
-typedef struct s_data
+void	set_pipe(t_data *data)
 {
-	int		**fds;
-	int		status;
-	int		inf_fd;
-	int		outf_fd;
-	int		cmd_num;
-	char	*infile;
-	char	*outfile;
-	char	**paths;
-	char	**envp;
-	char	**cmd;
-}	t_data;
+}
 
-//main
-//pipex_split
-//utils
-//pipe
-#endif
+void	start_pipe(t_data *data)
+{
+	pid_t	pid;
+	int		i;
+
+	i = 0;
+	//사용하는 fd = i
+	while (i < data->cmd_num - 1)
+	{
+		pid = fork();
+		if (pid == 0)
+			break ;
+		i++;
+	}
+	if (pid == 0)
+		set_pipe(data);
+	waitpid(-1, data.status, 0);
+}

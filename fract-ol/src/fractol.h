@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 00:16:41 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/17 16:07:20 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:40:30 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <errno.h>
-# include <math.h>
 
 typedef struct s_data
 {

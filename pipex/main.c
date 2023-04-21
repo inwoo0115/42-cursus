@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/18 22:11:27 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/21 22:03:32 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void	run_cmd(t_data *data, char *cmd)
 {
-	char	**cmd;
+	char	**cmds;
 	char	*path;
 	int		i;
 
 	i = 0;
-	cmd = ft_split(cmd, ' ');
+	cmds = ft_split(cmd, ' ');
 	while (data->paths[i])
 	{
-		path = ft_strjoin(data->paths[i], cmd[0]);
+		path = ft_strjoin(data->paths[i], cmds[0]);
 		if (access(path, X_OK) == 0)
 			break ;
 		free(path);
 		i++;
 	}
-	execve(path, cmd, data->envp);
+	execve(path, cmds, data->envp);
 }
 
 void	get_path(t_data *data, char **envp)
@@ -49,22 +49,14 @@ void	init_data(t_data *data, int argc, char **argv, char **envp)
 	int	i;
 
 	i = 0;
-	data->fds = (int **)malloc(sizeof(int *) * (argc - 1));
-	if (!data->fds)
-		return ;
-	while (i < argc - 1)
-	{
-		data->fds[i] = (int *)malloc(sizeof(int) * 2);
-		if (!data->fds[i])
-			return ;
-		i++;
-	}
 	data->status = 0;
 	data->envp = envp;
 	data->cmd = argv;
 	data->infile = argv[1];
 	data->outfile = argv[argc - 1];
-	data->cmd_num = argc - 1;
+	data->cmd_num = argc - 3;
+	data->inf_fd = open(data->infile, O_RDONLY | O_CREAT | O_EXCL);
+	data->outf_fd = open(data->outfile, O_WRONLY | O_CREAT | O_EXCL, 0644);
 }
 
 int	main(int argc, char *argv[], char **envp)

@@ -6,13 +6,13 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 19:24:07 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/18 19:24:39 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/21 21:51:10 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex.h"
 
-static char	**make_split(char const *s, char c, char **split_word)
+char	**make_split(char const *s, char c, char **split_word)
 {
 	int	i;
 	int	j;
@@ -37,7 +37,7 @@ static char	**make_split(char const *s, char c, char **split_word)
 	return (split_word);
 }
 
-static int	num_word(char const *s, char c)
+int	num_word(char const *s, char c)
 {
 	int	check;
 	int	num;
@@ -60,7 +60,7 @@ static int	num_word(char const *s, char c)
 	return (num);
 }
 
-static int	num_letter(char const *s, char c, int i)
+int	num_letter(char const *s, char c, int i)
 {
 	int	num;
 
@@ -73,7 +73,7 @@ static int	num_letter(char const *s, char c, int i)
 	return (num);
 }
 
-static char	**split_free(char **split_word)
+char	**split_free(char **split_word)
 {
 	int	i;
 

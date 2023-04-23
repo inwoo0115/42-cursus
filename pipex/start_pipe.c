@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 20:12:43 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/23 22:12:35 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/23 23:27:31 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	start_pipe(t_data *data)
 	i = 0;
 	while (i < data->cmd_num)
 	{
+		if (i >= 2)
+			re_pipe(data, i);
 		pid = fork();
 		if (pid == 0)
 		{
@@ -42,5 +44,22 @@ void	start_pipe(t_data *data)
 	}
 	if (pid != 0)
 		close_all(data);
-	waitpid(-1, &data->status, 0);
+	while (waitpid(-1, &data->status, 0) != -1)
+		printf("status: %d\n", WEXITSTATUS(data->status));
+}
+
+void	re_pipe(t_data *data, int i)
+{
+	if (i % 2 == 0)
+	{
+		close(data->fds[0][0]);
+		close(data->fds[0][1]);
+		pipe(data->fds[0]);
+	}
+	else if (i % 2 == 1)
+	{
+		close(data->fds[1][0]);
+		close(data->fds[1][1]);
+		pipe(data->fds[1]);
+	}
 }

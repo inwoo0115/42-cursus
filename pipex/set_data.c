@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:07:33 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/23 22:12:44 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/23 23:15:09 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	mid_cmd(t_data *data, int i)
 		dup2(data->fds[1][WRITE], 1);
 	}
 	else if (i % 2 == 0)
-	{		
+	{
 		close(data->fds[0][READ]);
 		close(data->fds[1][WRITE]);
 		dup2(data->fds[1][READ], 0);

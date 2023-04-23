@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:44:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/23 22:12:40 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/23 23:26:29 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ size_t	ft_strlen(const char *s);
 //start_pipe
 void	set_pipe(t_data *data, int i);
 void	start_pipe(t_data *data);
+void	re_pipe(t_data *data, int i);
 
 //set_data
 void	close_all(t_data *data);

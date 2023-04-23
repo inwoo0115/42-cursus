@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:44:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/21 22:14:47 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/23 22:12:40 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <sys/wait.h>
 # include <stdio.h> //수정 바람
 
-# define READ 1
-# define WRITE 0
+# define READ 0
+# define WRITE 1
 
 typedef struct s_data
 {
@@ -54,11 +54,12 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 
 //start_pipe
-void	close_pipe(t_data *data, int i);
 void	set_pipe(t_data *data, int i);
 void	start_pipe(t_data *data);
 
 //set_data
-void	set_data(t_data *data, int i);
 void	close_all(t_data *data);
+void	first_cmd(t_data *data, int i);
+void	mid_cmd(t_data *data, int i);
+void	last_cmd(t_data *data, int i);
 #endif

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/21 22:03:32 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/23 22:12:37 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ void	get_path(t_data *data, char **envp)
 			data->paths = ft_split(envp[i] + 5, ':');
 		i++;
 	}
+	i = 0;
+	while (data->paths[i])
+	{
+		data->paths[i] = ft_strjoin(data->paths[i], "/");
+		i++;
+	}
 }
 
 void	init_data(t_data *data, int argc, char **argv, char **envp)
@@ -55,8 +61,8 @@ void	init_data(t_data *data, int argc, char **argv, char **envp)
 	data->infile = argv[1];
 	data->outfile = argv[argc - 1];
 	data->cmd_num = argc - 3;
-	data->inf_fd = open(data->infile, O_RDONLY | O_CREAT | O_EXCL);
-	data->outf_fd = open(data->outfile, O_WRONLY | O_CREAT | O_EXCL, 0644);
+	data->inf_fd = open(data->infile, O_RDONLY);
+	data->outf_fd = open(data->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 }
 
 int	main(int argc, char *argv[], char **envp)

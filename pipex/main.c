@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/24 17:15:26 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:19:52 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	run_cmd(t_data *data, char *cmd)
 
 void	get_path(t_data *data, char **envp)
 {
+	int		i;
+	char	*tmp;
 	int		i;
 	char	*tmp;
 

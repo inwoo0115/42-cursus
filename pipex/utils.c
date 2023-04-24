@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:56:54 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/24 17:00:25 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:32:04 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 void	ft_error(char *str, t_data *data)
 {
-	write(1, str, ft_strlen(str));
+	perror(str);
 	free_res(data);
-	exit (0);
+	exit (1);
 }

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/24 17:19:52 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/25 01:06:13 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,31 @@ void	run_cmd(t_data *data, char *cmd)
 	{
 		path = ft_strjoin(data->paths[i], cmds[0]);
 		if (!path)
-			ft_error("Memory Error\n", data);
+			ft_error("Memory Error", data);
 		if (access(path, X_OK) == 0)
 			break ;
 		free(path);
 		i++;
 	}
 	if (execve(path, cmds, data->envp) < 0)
-		ft_error("Command Not Found\n", data);
+		ft_error("Command Not Found", data);
 	i = 0;
 	while (cmds[i])
 		free(cmds[i++]);
 	free(cmds);
 }
 
-void	get_path(t_data *data, char **envp)
+void	get_path(t_data *data, char **envp, int i)
 {
-	int		i;
-	char	*tmp;
-	int		i;
 	char	*tmp;
 
-	i = 0;
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "PATH", 4) == 0)
 		{
 			data->paths = ft_split(envp[i] + 5, ':');
 			if (!data->paths)
-				ft_error("Memory Error\n", data);
+				ft_error("Memory Error", data);
 		}
 		i++;
 	}
@@ -63,7 +59,7 @@ void	get_path(t_data *data, char **envp)
 		free(data->paths[i]);
 		data->paths[i] = ft_strjoin(tmp, "/");
 		if (!data->paths[i])
-			ft_error("Memory Error\n", data);
+			ft_error("Memory Error", data);
 		i++;
 	}
 }
@@ -79,7 +75,7 @@ void	init_data(t_data *data, int argc, char **argv, char **envp)
 	data->inf_fd = open(data->infile, O_RDONLY);
 	data->outf_fd = open(data->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->inf_fd == -1 || data->outf_fd == -1)
-		ft_error("File Not Found\n", data);
+		ft_error("File Not Found", data);
 }
 
 int	free_res(t_data *data)
@@ -101,8 +97,8 @@ int	main(int argc, char *argv[], char **envp)
 	t_data	data;
 
 	if (argc != 5)
-		ft_error("Wrong arguments\n", &data);
-	get_path(&data, envp);
+		ft_error("Wrong arguments", &data);
+	get_path(&data, envp, 0);
 	init_data(&data, argc, argv, envp);
 	start_pipe(&data);
 	return (free_res(&data));

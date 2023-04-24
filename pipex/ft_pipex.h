@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:44:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/23 23:26:29 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:05:23 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_data
 }	t_data;
 
 //main
+int		free_res(t_data *data);
 void	run_cmd(t_data *data, char *cmd);
 void	get_path(t_data *data, char **envp);
 void	init_data(t_data *data, int argc, char **argv, char **envp);
@@ -52,6 +53,7 @@ char	**ft_split(char const *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
+void	ft_error(char *str, t_data *data);
 
 //start_pipe
 void	set_pipe(t_data *data, int i);

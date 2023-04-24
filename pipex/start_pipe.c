@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 20:12:43 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/23 23:27:31 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:00:57 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	start_pipe(t_data *data)
 	if (pid != 0)
 		close_all(data);
 	while (waitpid(-1, &data->status, 0) != -1)
-		printf("status: %d\n", WEXITSTATUS(data->status));
+		printf("status: %d\n", WEXITSTATUS(data->status)); //printf 써도 됬었나?
 }
 
 void	re_pipe(t_data *data, int i)

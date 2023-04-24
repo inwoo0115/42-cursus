@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:56:54 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/21 21:50:10 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:00:25 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		newstr[i++] = s2[j++];
 	newstr[i] = 0;
 	return (newstr);
+}
+
+void	ft_error(char *str, t_data *data)
+{
+	write(1, str, ft_strlen(str));
+	free_res(data);
+	exit (0);
 }

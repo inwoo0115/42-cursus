@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:44:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/28 18:13:18 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/28 23:49:25 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_data
 }	t_data;
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 5
 # endif
 
 typedef struct s_list
@@ -85,6 +85,7 @@ char	*make_line(char	*str);
 char	*get_newline(int fd, char *buff, t_list *data, int len);
 char	*find_data(t_list *data, int i);
 int		check_newline(char *str, t_list *data, int i, int j);
+char	*ft_strjoin_gnl(char *s1, char *s2);
 
 //heredoc
 void	ft_heredoc(t_data *data, char *limiter);

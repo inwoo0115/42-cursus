@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 17:14:08 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/28 18:13:19 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/28 23:50:17 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*get_newline(int fd, char *buff, t_list *data, int len)
 	while (len > 0)
 	{
 		buff[len] = '\0';
-		temp = ft_strjoin(temp, buff);
+		temp = ft_strjoin_gnl(temp, buff);
 		if (!temp)
 			return (0);
 		if (check_newline(buff, data, 0, 0))

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 17:14:37 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/28 17:15:35 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/28 23:49:29 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,30 @@ int	check_newline(char *str, t_list *data, int i, int j)
 	data->len = i - data->index;
 	data->buff[j] = '\0';
 	return (1);
+}
+
+char	*ft_strjoin_gnl(char *s1, char *s2)
+{
+	size_t		len;
+	char		*newstr;
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	len = ft_strlen(s1) + ft_strlen(s2);
+	newstr = (char *)malloc(len + 1);
+	if (newstr == 0)
+	{
+		free(s1);
+		return (0);
+	}
+	while (s1[j])
+		newstr[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		newstr[i++] = s2[j++];
+	newstr[i] = '\0';
+	free(s1);
+	return (newstr);
 }

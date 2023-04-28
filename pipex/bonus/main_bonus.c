@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/28 18:57:50 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/28 23:50:19 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	get_path(t_data *data, char **envp, int i)
 	i = 0;
 	while (data->paths[i])
 	{
-		tmp = data->paths[i];
-		free(data->paths[i]);
-		data->paths[i] = ft_strjoin(tmp, "/");
-		if (!data->paths[i])
+		tmp = ft_strjoin(data->paths[i], "/");
+		if (!tmp)
 			ft_error("Memory Error", data);
+		free(data->paths[i]);
+		data->paths[i] = tmp;
 		i++;
 	}
 }
@@ -106,5 +106,6 @@ int	main(int argc, char *argv[], char **envp)
 	else
 		init_data(&data, argc, argv, envp);
 	start_pipe(&data);
+	system("leaks pipex");
 	return (free_res(&data));
 }

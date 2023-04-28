@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/28 17:06:06 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/28 23:21:50 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	get_path(t_data *data, char **envp, int i)
 	i = 0;
 	while (data->paths[i])
 	{
-		tmp = data->paths[i];
-		free(data->paths[i]);
-		data->paths[i] = ft_strjoin(tmp, "/");
-		if (!data->paths[i])
+		tmp = ft_strjoin(data->paths[i], "/");
+		if (!tmp)
 			ft_error("Memory Error", data);
+		free(data->paths[i]);
+		data->paths[i] = tmp;
 		i++;
 	}
 }

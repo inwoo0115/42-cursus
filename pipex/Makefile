@@ -6,13 +6,13 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 21:39:26 by wonjilee          #+#    #+#              #
-#    Updated: 2023/04/28 23:45:03 by wonjilee         ###   ########.fr        #
+#    Updated: 2023/04/28 23:52:04 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := pipex
 CC = cc
-CFLAG = -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAG = -Wall -Wextra -Werror
 
 SRCS = ./srcs/main.c ./srcs/pipex_split.c ./srcs/set_data.c ./srcs/start_pipe.c ./srcs/utils.c
 

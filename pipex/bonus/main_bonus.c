@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/28 23:50:19 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/28 23:52:09 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,5 @@ int	main(int argc, char *argv[], char **envp)
 	else
 		init_data(&data, argc, argv, envp);
 	start_pipe(&data);
-	system("leaks pipex");
 	return (free_res(&data));
 }

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:44:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/28 23:49:25 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/29 16:43:10 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_data
 	int		outf_fd;
 	int		cmd_num;
 	int		not_cmd;
+	char	filename[9];
 	char	*infile;
 	char	*outfile;
 	char	**paths;
@@ -88,7 +89,7 @@ int		check_newline(char *str, t_list *data, int i, int j);
 char	*ft_strjoin_gnl(char *s1, char *s2);
 
 //heredoc
-void	ft_heredoc(t_data *data, char *limiter);
+void	ft_heredoc(t_data *data, char *limiter, int i);
 void	init_heredoc(t_data *data, int argc, char **argv, char **envp);
 void	change_file(char *filename, int i);
 

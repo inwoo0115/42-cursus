@@ -6,36 +6,38 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 17:19:55 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/28 23:52:59 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/29 16:52:51 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex_bonus.h"
 
-void	ft_heredoc(t_data *data, char *limiter)
+void	ft_heredoc(t_data *data, char *limiter, int i)
 {
-	char	filename[9];
 	char	*str;
-	int		i;
 
-	i = 0;
-	change_file(filename, i);
-	while (access(filename, F_OK) == 0 && i < 100)
-		change_file(filename, i++);
+	change_file(data->filename, i);
+	while (access(data->filename, F_OK) == 0 && i < 100)
+		change_file(data->filename, i++);
 	if (i == 100)
 		ft_error("File Not Found", data);
-	data->inf_fd = open(filename, O_RDWR | O_CREAT, 0644);
-	data->infile = filename;
+	data->inf_fd = open(data->filename, O_RDWR | O_CREAT, 0644);
+	data->infile = data->filename;
 	str = get_next_line(0);
+	if (!str)
+		ft_error("Memory Error", data);
 	while (ft_strncmp(limiter, str, ft_strlen(str) - 1) != 0)
 	{
 		write(data->inf_fd, str, ft_strlen(str));
 		free(str);
 		str = get_next_line(0);
+		if (!str)
+			ft_error("Memory Error", data);
 	}
 	free(str);
 	close(data->inf_fd);
-	data->inf_fd = open(filename, O_RDONLY);
+	data->inf_fd = open(data->filename, O_RDONLY);
+	unlink(data->filename);
 }
 
 void	change_file(char *filename, int i)
@@ -45,11 +47,11 @@ void	change_file(char *filename, int i)
 	filename[2] = 'm';
 	filename[3] = 'p';
 	filename[4] = '/';
-	filename[5] = '0' + i % 10;
+	filename[7] = '0' + i % 10;
 	i /= 10;
 	filename[6] = '0' + i % 10;
 	i /= 10;
-	filename[7] = '0' + i % 10;
+	filename[5] = '0' + i % 10;
 	filename[8] = '\0';
 }
 

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/28 23:21:50 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:01:54 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	run_cmd(t_data *data, char *cmd)
 		free(path);
 		i++;
 	}
-	if (execve(path, cmds, data->envp) < 0)
+	if (execve(path, cmds, data->envp) < 0 && execve(cmd, cmds, data->envp))
 		ft_error("Command Not Found", data);
 	i = 0;
 	while (cmds[i])

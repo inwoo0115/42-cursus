@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/29 17:01:54 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:27:21 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,3 @@ int	main(int argc, char *argv[], char **envp)
 	start_pipe(&data);
 	return (free_res(&data));
 }
-
-//here doc 추가

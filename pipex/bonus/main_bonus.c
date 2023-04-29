@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/29 17:01:51 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:29:02 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int	main(int argc, char *argv[], char **envp)
 {
 	t_data	data;
 
+	if (argc < 5)
+		ft_error("Wrong arguments", &data);
 	get_path(&data, envp, 0);
 	if (ft_strncmp("here_doc", argv[1], 9) == 0)
 	{

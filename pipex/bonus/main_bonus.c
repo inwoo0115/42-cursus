@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/29 17:29:02 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/29 19:24:03 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	run_cmd(t_data *data, char *cmd)
 	{
 		path = ft_strjoin(data->paths[i], cmds[0]);
 		if (!path)
-			ft_error("Memory Error", data);
+			ft_error(ENOMEM, data);
 		if (access(path, X_OK) == 0)
 			break ;
 		free(path);
 		i++;
 	}
 	if (execve(path, cmds, data->envp) < 0 && execve(cmd, cmds, data->envp))
-		ft_error("Command Not Found", data);
+		ft_error(127, data);
 	i = 0;
 	while (cmds[i])
 		free(cmds[i++]);
@@ -48,7 +48,7 @@ void	get_path(t_data *data, char **envp, int i)
 		{
 			data->paths = ft_split(envp[i] + 5, ':');
 			if (!data->paths)
-				ft_error("Memory Error", data);
+				ft_error(ENOMEM, data);
 		}
 		i++;
 	}
@@ -57,7 +57,7 @@ void	get_path(t_data *data, char **envp, int i)
 	{
 		tmp = ft_strjoin(data->paths[i], "/");
 		if (!tmp)
-			ft_error("Memory Error", data);
+			ft_error(ENOMEM, data);
 		free(data->paths[i]);
 		data->paths[i] = tmp;
 		i++;
@@ -76,7 +76,7 @@ void	init_data(t_data *data, int argc, char **argv, char **envp)
 	data->inf_fd = open(data->infile, O_RDONLY);
 	data->outf_fd = open(data->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->inf_fd == -1 || data->outf_fd == -1)
-		ft_error("File Not Found", data);
+		ft_error(ENOENT, data);
 }
 
 int	free_res(t_data *data)
@@ -98,7 +98,7 @@ int	main(int argc, char *argv[], char **envp)
 	t_data	data;
 
 	if (argc < 5)
-		ft_error("Wrong arguments", &data);
+		ft_error(127, &data);
 	get_path(&data, envp, 0);
 	if (ft_strncmp("here_doc", argv[1], 9) == 0)
 	{

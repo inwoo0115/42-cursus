@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:44:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/24 20:06:59 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/04/29 18:36:25 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+# include <string.h>
+# include <errno.h>
 # include <stdio.h> //수정 바람
 
 # define READ 0
@@ -53,7 +55,7 @@ char	**ft_split(char const *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
-void	ft_error(char *str, t_data *data);
+void	ft_error(int error, t_data *data);
 
 //start_pipe
 void	set_pipe(t_data *data, int i);

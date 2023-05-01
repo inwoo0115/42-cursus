@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:44:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/29 18:36:25 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:34:41 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <sys/wait.h>
 # include <string.h>
 # include <errno.h>
-# include <stdio.h> //수정 바람
 
 # define READ 0
 # define WRITE 1
@@ -31,6 +30,7 @@ typedef struct s_data
 	int		inf_fd;
 	int		outf_fd;
 	int		cmd_num;
+	int		exit_status;
 	char	*infile;
 	char	*outfile;
 	char	**paths;
@@ -40,7 +40,7 @@ typedef struct s_data
 
 //main
 int		free_res(t_data *data);
-void	run_cmd(t_data *data, char *cmd);
+void	run_cmd(t_data *data, char *cmd, int i);
 void	get_path(t_data *data, char **envp, int i);
 void	init_data(t_data *data, int argc, char **argv, char **envp);
 

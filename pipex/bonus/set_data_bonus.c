@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:07:33 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/29 18:27:49 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:48:42 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ void	close_all(t_data *data)
 
 void	first_cmd(t_data *data, int i)
 {
+	if (data->inf_fd == -1 || data->outf_fd == -1)
+		ft_error(2, data);
 	close(data->fds[1][READ]);
 	close(data->fds[1][WRITE]);
 	close(data->outf_fd);
 	close(data->fds[0][READ]);
 	dup2(data->inf_fd, 0);
 	dup2(data->fds[0][WRITE], 1);
-	run_cmd(data, data->cmd[i + data->not_cmd]);
+	run_cmd(data, data->cmd[i + data->not_cmd], 0);
 }
 
 void	mid_cmd(t_data *data, int i)
@@ -51,7 +53,7 @@ void	mid_cmd(t_data *data, int i)
 	}
 	close(data->inf_fd);
 	close(data->outf_fd);
-	run_cmd(data, data->cmd[i + data->not_cmd]);
+	run_cmd(data, data->cmd[i + data->not_cmd], 0);
 }
 
 void	last_cmd(t_data *data, int i)
@@ -72,5 +74,5 @@ void	last_cmd(t_data *data, int i)
 		dup2(data->fds[1][READ], 0);
 	}
 	dup2(data->outf_fd, 1);
-	run_cmd(data, data->cmd[i + data->not_cmd]);
+	run_cmd(data, data->cmd[i + data->not_cmd], 0);
 }

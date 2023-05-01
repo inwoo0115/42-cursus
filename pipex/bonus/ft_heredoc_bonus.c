@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 17:19:55 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/29 19:04:54 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:42:02 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,4 @@ void	init_heredoc(t_data *data, int argc, char **argv, char **envp)
 	data->cmd_num = argc - 4;
 	data->not_cmd = 3;
 	data->outf_fd = open(data->outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (data->inf_fd == -1 || data->outf_fd == -1)
-		ft_error(ENOENT, data);
 }

@@ -6,19 +6,17 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/29 19:24:03 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:52:24 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex_bonus.h"
 
-void	run_cmd(t_data *data, char *cmd)
+void	run_cmd(t_data *data, char *cmd, int i)
 {
 	char	**cmds;
 	char	*path;
-	int		i;
 
-	i = 0;
 	cmds = ft_split(cmd, ' ');
 	while (data->paths[i])
 	{
@@ -30,9 +28,14 @@ void	run_cmd(t_data *data, char *cmd)
 		free(path);
 		i++;
 	}
-	if (execve(path, cmds, data->envp) < 0 && execve(cmd, cmds, data->envp))
-		ft_error(127, data);
 	i = 0;
+	if (execve(path, cmds, data->envp) < 0 && execve(cmd, cmds, data->envp) < 0)
+	{
+		while (cmds[i])
+			free(cmds[i++]);
+		free(cmds);
+		ft_error(127, data);
+	}
 	while (cmds[i])
 		free(cmds[i++]);
 	free(cmds);
@@ -75,8 +78,6 @@ void	init_data(t_data *data, int argc, char **argv, char **envp)
 	data->not_cmd = 2;
 	data->inf_fd = open(data->infile, O_RDONLY);
 	data->outf_fd = open(data->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (data->inf_fd == -1 || data->outf_fd == -1)
-		ft_error(ENOENT, data);
 }
 
 int	free_res(t_data *data)
@@ -102,11 +103,14 @@ int	main(int argc, char *argv[], char **envp)
 	get_path(&data, envp, 0);
 	if (ft_strncmp("here_doc", argv[1], 9) == 0)
 	{
+		if (argc < 6)
+			ft_error(127, &data);
 		ft_heredoc(&data, argv[2], 0);
 		init_heredoc(&data, argc, argv, envp);
 	}
 	else
 		init_data(&data, argc, argv, envp);
 	start_pipe(&data);
-	return (free_res(&data));
+	free_res(&data);
+	return (data.exit_status);
 }

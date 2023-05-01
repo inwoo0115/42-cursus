@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 20:12:43 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/04/29 19:30:24 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:37:03 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ void	start_pipe(t_data *data)
 	}
 	if (pid != 0)
 		close_all(data);
-	if (waitpid(-1, &data->status, 0) > 0)
-	{
-		if (WEXITSTATUS(data->status) > 0)
-			ft_error(WEXITSTATUS(data->status), data);
-	}
+	if (waitpid(pid, &data->status, 0))
+		data->exit_status = WEXITSTATUS(data->status);
+	waitpid(-1, &data->status, 0);
 }
 
 void	re_pipe(t_data *data, int i)

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 20:12:43 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/05/02 16:12:15 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/02 18:50:40 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	start_pipe(t_data *data)
 		close_all(data);
 	if (waitpid(pid, &data->status, 0))
 		data->exit_status = WEXITSTATUS(data->status);
-	waitpid(-1, &data->status, 0);
+	while (waitpid(-1, &data->status, 0) != -1 && i)
+		i--;
 }
 
 void	re_pipe(t_data *data, int i)

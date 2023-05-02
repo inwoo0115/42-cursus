@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/05/01 20:52:24 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:17:11 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ int	main(int argc, char *argv[], char **envp)
 	t_data	data;
 
 	if (argc < 5)
-		ft_error(127, &data);
+		ft_error(1, &data);
 	get_path(&data, envp, 0);
 	if (ft_strncmp("here_doc", argv[1], 9) == 0)
 	{
 		if (argc < 6)
-			ft_error(127, &data);
+			ft_error(1, &data);
 		ft_heredoc(&data, argv[2], 0);
 		init_heredoc(&data, argc, argv, envp);
 	}

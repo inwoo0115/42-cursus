@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:56:54 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/05/02 15:16:12 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/02 20:06:45 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,13 @@ void	ft_error(int error, t_data *data)
 {
 	if (error == 127)
 		write(2, "command not found\n", 19);
+	else if (error == 3)
+	{
+		write(2, "permission denied\n", 19);
+		error = 1;
+	}
 	else if (error == 1)
-		write(2, "Wrong argument\n", 16);
+		write(2, "wrong argument\n", 16);
 	else
 	{
 		write(2, strerror(error), ft_strlen(strerror(error)));

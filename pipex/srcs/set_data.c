@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:07:33 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/05/02 16:05:15 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/02 19:49:03 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ void	close_all(t_data *data)
 
 void	first_cmd(t_data *data, int i)
 {
-	if (data->inf_fd < 0)
+	if (data->inf_fd == -1)
 		ft_error(2, data);
+	else if (data->inf_fd == -2)
+		ft_error(3, data);
 	close(data->fds[1][READ]);
 	close(data->fds[1][WRITE]);
 	close(data->outf_fd);
@@ -58,7 +60,7 @@ void	mid_cmd(t_data *data, int i)
 
 void	last_cmd(t_data *data, int i)
 {
-	if (data->outf_fd < 0)
+	if (data->outf_fd == -1)
 		ft_error(2, data);
 	close(data->inf_fd);
 	if (i % 2 == 1)

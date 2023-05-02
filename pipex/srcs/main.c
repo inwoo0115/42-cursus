@@ -6,40 +6,11 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/05/02 16:38:04 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/02 20:06:52 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex.h"
-
-void	run_cmd(t_data *data, char *cmd, int i)
-{
-	char	**cmds;
-	char	*path;
-
-	cmds = ft_split(cmd, ' ');
-	while (data->paths[i])
-	{
-		path = ft_strjoin(data->paths[i], cmds[0]);
-		if (!path)
-			ft_error(ENOMEM, data);
-		if (access(path, X_OK) == 0)
-			break ;
-		free(path);
-		i++;
-	}
-	i = 0;
-	if (execve(path, cmds, data->envp) < 0 && execve(cmd, cmds, data->envp) < 0)
-	{
-		while (cmds[i])
-			free(cmds[i++]);
-		free(cmds);
-		ft_error(127, data);
-	}
-	while (cmds[i])
-		free(cmds[i++]);
-	free(cmds);
-}
 
 void	get_path(t_data *data, char **envp, int i)
 {
@@ -76,6 +47,8 @@ void	init_data(t_data *data, int argc, char **argv, char **envp)
 	data->outfile = argv[argc - 1];
 	data->cmd_num = argc - 3;
 	data->inf_fd = open(data->infile, O_RDONLY);
+	if (access(data->infile, F_OK) == 0 && data->inf_fd == -1)
+		data->inf_fd = -2;
 	data->outf_fd = open(data->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 }
 

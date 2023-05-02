@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:07:33 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/05/02 16:13:10 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/02 19:41:50 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	first_cmd(t_data *data, int i)
 {
 	if (data->inf_fd == -1)
 		ft_error(2, data);
+	else if (data->inf_fd == -2)
+		ft_error(3, data);
 	close(data->fds[1][READ]);
 	close(data->fds[1][WRITE]);
 	close(data->outf_fd);

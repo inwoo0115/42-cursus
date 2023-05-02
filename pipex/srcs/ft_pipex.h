@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:44:05 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/05/02 19:55:36 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/02 21:33:39 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/wait.h>
 # include <string.h>
 # include <errno.h>
+# include <stdio.h>
 
 # define READ 0
 # define WRITE 1

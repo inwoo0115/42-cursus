@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 19:39:26 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/05/02 20:49:57 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/02 22:02:55 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	run_cmd(t_data *data, char *cmd, int i)
 	}
 	if (ft_execve(data, path, cmds, cmd) == 1)
 	{
-		if (pd == 1)
+		if (pd == 1 || (access(cmd, F_OK) == 0 && access(cmd, X_OK) != 0))
 			ft_error(3, data);
 		else if (pd == 0)
 			ft_error(127, data);

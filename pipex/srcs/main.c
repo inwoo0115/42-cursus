@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:43:52 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/05/02 20:06:52 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:26:07 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,14 @@ int	free_res(t_data *data)
 	return (0);
 }
 
+void	asd(void)
+{
+	system("leaks pipex");
+}
 int	main(int argc, char *argv[], char **envp)
 {
 	t_data	data;
-
+	atexit(asd);
 	if (argc != 5)
 		ft_error(1, &data);
 	get_path(&data, envp, 0);

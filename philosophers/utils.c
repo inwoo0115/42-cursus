@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:18:33 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/05/09 19:27:31 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/06/06 21:27:05 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	ft_atoi(const char *str)
 		if (str[i] >= '0' && str[i] <= '9')
 			num = num * 10 + (str[i++] - '0');
 		else
-			exit (1);
+		{
+			write(2, "Not correct argument", 20);
+			exit(1);
+		}
 	}
 	return (num);
 }

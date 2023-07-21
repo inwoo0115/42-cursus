@@ -1,42 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/07/21 13:21:59 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/07/20 20:51:49 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/07/20 20:51:49 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../minishell.h"
 
-void	thread_function(void *input)
+int	ft_isalpha(int c)
 {
-	t_data			*data;
-	int				num;
-	struct timeval	now;
-
-	data = input;
-	num = data->index;
-	while (1)
-	{
-		ft_eating(data, philo);
-		ft_sleeping(data, philo);
-		ft_thinking(data, philo);
-	}
-	return ;
-}
-
-int	ft_eating(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_sleeping(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_thinking(t_data *data, t_philo *philo)
-{
+	if ('A' <= c && 'Z' >= c)
+		return (1);
+	else if ('a' <= c && 'z' >= c)
+		return (1);
+	else
+		return (0);
 }

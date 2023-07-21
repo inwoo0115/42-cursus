@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   ft_free_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/07/21 13:21:59 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/07/20 20:51:41 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/07/20 20:51:41 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../minishell.h"
 
-void	thread_function(void *input)
+void	free_cmd_strs(t_cmd *cmd)
 {
-	t_data			*data;
-	int				num;
-	struct timeval	now;
+	int	i;
 
-	data = input;
-	num = data->index;
-	while (1)
+	if (cmd->cmd)
 	{
-		ft_eating(data, philo);
-		ft_sleeping(data, philo);
-		ft_thinking(data, philo);
+		i = 0;
+		while (cmd->cmd[i])
+		{
+			free(cmd->cmd[i]);
+			i++;
+		}
+		free(cmd->cmd);
 	}
-	return ;
-}
-
-int	ft_eating(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_sleeping(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_thinking(t_data *data, t_philo *philo)
-{
 }

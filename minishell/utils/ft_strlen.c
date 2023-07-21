@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/07/21 13:21:59 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/07/20 20:52:21 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/07/20 20:52:21 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../minishell.h"
 
-void	thread_function(void *input)
+size_t	ft_strlen(const char *s)
 {
-	t_data			*data;
-	int				num;
-	struct timeval	now;
+	size_t	i;
 
-	data = input;
-	num = data->index;
-	while (1)
-	{
-		ft_eating(data, philo);
-		ft_sleeping(data, philo);
-		ft_thinking(data, philo);
-	}
-	return ;
-}
-
-int	ft_eating(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_sleeping(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_thinking(t_data *data, t_philo *philo)
-{
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+		i++;
+	return (i);
 }

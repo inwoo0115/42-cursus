@@ -5,46 +5,38 @@
 #                                                     +:+ +:+         +:+      #
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/09 16:11:41 by wonjilee          #+#    #+#              #
-#    Updated: 2023/07/10 19:39:49 by wonjilee         ###   ########.fr        #
+#    Created: 2023/07/20 20:51:29 by wonjilee          #+#    #+#              #
+#    Updated: 2023/07/20 20:51:29 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := philo
-CC = cc
-CFLAG = -Wall -Wextra -Werror
+NAME		= libftprintf.a
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
 
-SRCS = 
+SRCS	=	ft_printf.c	\
+			ft_printf_cs.c\
+			ft_printf_diuxp.c\
+			ft_pstrlen.c\
+			ft_itoa.c\
+			ft_putnbr_base.c
 
-SRCS_BONUS = 
+OBJS	= $(SRCS:.c=.o)
 
-OBJS = $(SRCS:.c=.o)
+all: $(NAME)
 
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
-
-all : $(NAME)
-
-bonus : $(NAME)
+$(NAME): $(OBJS)
+	ar rc $@ $^
 
 %.o : %.c
-		$(CC) $(CFLAG) -c $< -o $@ -I ./srcs -I ./bonus
+	$(CC) -c $(CFLAGS) $< -o $@
 
-clean :
-		rm -f $(OBJS) $(OBJS_BONUS)
+clean:
+	rm -f $(OBJS)
 
-fclean : clean
-		rm -f $(NAME)
+fclean: clean
+	rm -f $(NAME)
 
-re : 
-		make fclean 
-		make all
+re: fclean all
 
-ifeq ($(findstring bonus, $(MAKECMDGOALS)), bonus)
-$(NAME): $(OBJS_BONUS)
-		$(CC) $(CFLAG) $(OBJS_BONUS) -o $@
-else
-$(NAME): $(OBJS)
-		$(CC) $(CFLAG) $(OBJS) -o $@
-endif
-
-.PHONY: all clean fclean re bonus
+.PHONY: all re clean fclean

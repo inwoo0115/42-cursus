@@ -1,42 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   ft_parse_letter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/07/21 13:21:59 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/07/20 20:50:40 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/07/20 20:50:41 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../minishell.h"
 
-void	thread_function(void *input)
+void	parse_letter(char *line, int i, t_state *stat)
 {
-	t_data			*data;
-	int				num;
-	struct timeval	now;
-
-	data = input;
-	num = data->index;
-	while (1)
-	{
-		ft_eating(data, philo);
-		ft_sleeping(data, philo);
-		ft_thinking(data, philo);
-	}
-	return ;
-}
-
-int	ft_eating(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_sleeping(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_thinking(t_data *data, t_philo *philo)
-{
+	stat->str[stat->index] = line[i];
+	stat->index++;
+	stat->str[stat->index] = '\0';
 }

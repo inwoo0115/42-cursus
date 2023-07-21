@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/07/21 13:21:59 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/07/20 20:51:26 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/07/20 20:51:27 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "ft_printf.h"
 
-void	thread_function(void *input)
+int	ft_pputnbr_base(long long nb, char *base)
 {
-	t_data			*data;
-	int				num;
-	struct timeval	now;
+	int		len;
 
-	data = input;
-	num = data->index;
-	while (1)
+	len = ft_pstrlen(base);
+	if (nb < 0)
 	{
-		ft_eating(data, philo);
-		ft_sleeping(data, philo);
-		ft_thinking(data, philo);
+		ft_pputchar_fd('-', 2);
+		nb *= -1;
 	}
-	return ;
-}
-
-int	ft_eating(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_sleeping(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_thinking(t_data *data, t_philo *philo)
-{
+	if (nb < len)
+	{
+		ft_pputchar_fd(base[nb], 2);
+	}
+	if (nb >= len)
+	{
+		ft_pputnbr_base(nb / len, base);
+		ft_pputnbr_base(nb % len, base);
+	}
+	return (n_count(nb, len));
 }

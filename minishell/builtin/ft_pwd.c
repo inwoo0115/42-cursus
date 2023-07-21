@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/07/21 13:21:59 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/07/20 20:49:56 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/07/20 20:49:56 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../minishell.h"
 
-void	thread_function(void *input)
+void	ft_pwd(t_main *main)
 {
-	t_data			*data;
-	int				num;
-	struct timeval	now;
+	char	*path;
 
-	data = input;
-	num = data->index;
-	while (1)
+	path = getcwd(NULL, 0);
+	if (path == NULL)
 	{
-		ft_eating(data, philo);
-		ft_sleeping(data, philo);
-		ft_thinking(data, philo);
+		main->status = 1;
+		ft_error2(PWD_ERROR, "pwd");
+		return ;
 	}
-	return ;
-}
-
-int	ft_eating(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_sleeping(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_thinking(t_data *data, t_philo *philo)
-{
+	write(1, path, ft_strlen(path));
+	write(1, "\n", 1);
+	main->status = 0;
+	free(path);
 }

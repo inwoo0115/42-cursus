@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:54:36 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/06/17 21:51:11 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:22:08 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_monitoring(void *input)
 		{
 			pthread_mutex_lock(&(data->sys_mutex[0]));
 			data->death = 1;
-//print die
+			//print die
 			pthread_mutex_unlock(&(data->sys_mutex[0]));
 		}
 		usleep(100);

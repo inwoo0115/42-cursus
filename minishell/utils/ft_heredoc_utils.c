@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   ft_heredoc_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/07/21 13:21:59 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/07/20 20:51:46 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/07/20 20:51:47 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../minishell.h"
 
-void	thread_function(void *input)
+void	cursor(void)
 {
-	t_data			*data;
-	int				num;
-	struct timeval	now;
-
-	data = input;
-	num = data->index;
-	while (1)
-	{
-		ft_eating(data, philo);
-		ft_sleeping(data, philo);
-		ft_thinking(data, philo);
-	}
-	return ;
+	ft_printf_str("\033[1A");
+	ft_printf_str("\033[2C");
 }
 
-int	ft_eating(t_data *data, t_philo *philo)
+void	put_str(char *str, char *file, int i)
 {
-}
-
-int	ft_sleeping(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_thinking(t_data *data, t_philo *philo)
-{
+	while (file[++i])
+		str[i] = file[i];
+	str[i] = '\0';
 }

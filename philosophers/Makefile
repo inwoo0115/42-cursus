@@ -6,7 +6,7 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/09 16:11:41 by wonjilee          #+#    #+#              #
-#    Updated: 2023/07/10 19:39:49 by wonjilee         ###   ########.fr        #
+#    Updated: 2023/07/25 19:11:47 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME := philo
 CC = cc
 CFLAG = -Wall -Wextra -Werror
 
-SRCS = 
+SRCS = main.c ft_init.c ft_monitoring.c ft_thread.c utils.c
 
-SRCS_BONUS = 
+#SRCS_BONUS = 
 
 OBJS = $(SRCS:.c=.o)
 

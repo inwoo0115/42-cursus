@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   ft_monitoring.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/07/21 13:21:59 by wonjilee         ###   ########.fr       */
+/*   Created: 2023/06/17 19:54:36 by wonjilee          #+#    #+#             */
+/*   Updated: 2023/07/25 19:28:37 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	thread_function(void *input)
+void	ft_monitoring(t_data *data)
 {
-	t_data			*data;
-	int				num;
-	struct timeval	now;
+	int	i;
 
-	data = input;
-	num = data->index;
-	while (1)
+	i = data->index;
+	while (data->death == 0 && (data->info[i]).eat_time != data->t_eat)
 	{
-		ft_eating(data, philo);
-		ft_sleeping(data, philo);
-		ft_thinking(data, philo);
+		if ((data->info[i]).eat_time != data->t_eat && get_time() \
+		- (data->info[i]).last_eat > data->t_die)
+		{
+			pthread_mutex_lock(&(data->sys[EAT]));
+			data->death = 1;
+			thread_print(data, DIE, i + 1);
+			pthread_mutex_unlock(&(data->sys[EAT]));
+		}
+		usleep(100);
 	}
 	return ;
-}
-
-int	ft_eating(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_sleeping(t_data *data, t_philo *philo)
-{
-}
-
-int	ft_thinking(t_data *data, t_philo *philo)
-{
 }

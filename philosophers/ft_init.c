@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:21:19 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/07/21 13:21:26 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:35:31 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_data(int argc, char **argv, t_data *data)
 	else
 		data->must_eat = -1;
 	data->death = 0;
+	data->index = 0;
 	data->threads = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
 	data->monitoring = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
 	data->info = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
@@ -34,21 +35,44 @@ void	init_mutex(t_data *data)
 	int	i;
 
 	i = 0;
-	data->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * \
+	data->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * \
 	data->philo_num);
 	while (i < data->philo_num)
-		pthread_mutex_init(&(data->fork_mutex)[i++], NULL);
+		pthread_mutex_init(&(data->fork)[i++], NULL);
 	i = 0;
 	while (i < 4)
-		pthread_mutex_init(&(data->sys_mutex[i++]), NULL);
+		pthread_mutex_init(&(data->sys[i++]), NULL);
 }
 
 void	philo_init(t_data *data, int i)
 {
-	data->index = i;
 	data->info[i].index = i;
-	data->info[i].first_fork = i;
-	data->info[i].second_fork = i + 1;
-	data->info[i].eat_time = 0;
+	data->info[i].first = i - 1;
+	if (i == data->philo_num)
+		data->info[i].second = 0;
+	else
+		data->info[i].second = i;
+	data->info[i].eat_time = data->t_eat;
 	data->info[i].last_eat = 0;
+}
+
+void	make_thread(t_data *data, int i)
+{
+	while (i < data->philo_num)
+	{
+		if (i != data->index)
+		{
+			pthread_create(&(data->threads[i]), NULL, \
+			(void *)thread_function, data);
+			pthread_create(&(data->monitoring[i]), NULL, \
+			(void *)ft_monitoring, data);
+			i = data->index;
+		}
+	}
+	i = 0;
+	while (i < data->philo_num)
+	{
+		pthread_join((data->threads)[i], NULL);
+		pthread_join((data->monitoring)[i++], NULL);
+	}
 }

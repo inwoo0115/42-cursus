@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:19:26 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/07/25 19:57:58 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/01 19:57:56 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int argc, char *argv[])
 {
 	t_data			data;
-	struct timeval	start_time;
 
 	if (argc < 5 || argc > 6)
 	{
@@ -23,8 +22,7 @@ int	main(int argc, char *argv[])
 		exit(1);
 	}
 	init_data(argc, argv, &data);
-	gettimeofday(&start_time, NULL);
-	data.t_start = start_time.tv_usec;
+	data.t_start = get_time();
 	make_thread(&data, -1);
 	return (0);
 }

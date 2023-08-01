@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:21:19 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/07/25 19:35:31 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/01 21:16:09 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_data(int argc, char **argv, t_data *data)
 	data->death = 0;
 	data->index = 0;
 	data->threads = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
-	data->monitoring = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
+	data->monitoring = (pthread_t)malloc(sizeof(pthread_t));
 	data->info = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
 	init_mutex(data);
 }
@@ -44,35 +44,35 @@ void	init_mutex(t_data *data)
 		pthread_mutex_init(&(data->sys[i++]), NULL);
 }
 
-void	philo_init(t_data *data, int i)
+void	philo_init(t_data *data, t_philo *info, int i)
 {
-	data->info[i].index = i;
-	data->info[i].first = i - 1;
-	if (i == data->philo_num)
-		data->info[i].second = 0;
+	i--;
+	info->index = i;
+	info->first = i;
+	if (i == data->philo_num - 1)
+		info->second = 0;
 	else
-		data->info[i].second = i;
-	data->info[i].eat_time = data->t_eat;
-	data->info[i].last_eat = 0;
+		info->second = i + 1;
+	info->eat_time = 0;
+	info->last_eat = get_time();
 }
 
 void	make_thread(t_data *data, int i)
 {
-	while (i < data->philo_num)
+	pthread_mutex_lock(&(data->sys[THINK]));
+	while (i < data->philo_num - 1)
 	{
 		if (i != data->index)
 		{
-			pthread_create(&(data->threads[i]), NULL, \
-			(void *)thread_function, data);
-			pthread_create(&(data->monitoring[i]), NULL, \
-			(void *)ft_monitoring, data);
 			i = data->index;
+			pthread_create(&(data->threads[data->index]), NULL, \
+			(void *)thread_function, data);
 		}
 	}
+	pthread_mutex_unlock(&(data->sys[THINK]));
+	pthread_create(&data->monitoring, NULL, (void *)ft_monitoring, data);
 	i = 0;
 	while (i < data->philo_num)
-	{
-		pthread_join((data->threads)[i], NULL);
-		pthread_join((data->monitoring)[i++], NULL);
-	}
+		pthread_join((data->threads)[i++], NULL);
+	pthread_join(data->monitoring, NULL);
 }

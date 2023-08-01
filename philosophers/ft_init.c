@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:21:19 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/01 21:16:09 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/01 22:45:48 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_data(int argc, char **argv, t_data *data)
 	else
 		data->must_eat = -1;
 	data->death = 0;
-	data->index = 0;
+	data->index = (int *)malloc(sizeof(int) * data->philo_num);
 	data->threads = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
 	data->monitoring = (pthread_t)malloc(sizeof(pthread_t));
 	data->info = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
@@ -59,17 +59,12 @@ void	philo_init(t_data *data, t_philo *info, int i)
 
 void	make_thread(t_data *data, int i)
 {
-	pthread_mutex_lock(&(data->sys[THINK]));
-	while (i < data->philo_num - 1)
-	{
-		if (i != data->index)
-		{
-			i = data->index;
-			pthread_create(&(data->threads[data->index]), NULL, \
-			(void *)thread_function, data);
-		}
-	}
-	pthread_mutex_unlock(&(data->sys[THINK]));
+	pthread_mutex_lock(&(data->sys[START]));
+	while (i < data->philo_num)
+		pthread_create(&(data->threads[i++]), NULL, \
+		(void *)thread_function, data);
+	data->t_start = get_time();
+	pthread_mutex_unlock(&(data->sys[START]));
 	pthread_create(&data->monitoring, NULL, (void *)ft_monitoring, data);
 	i = 0;
 	while (i < data->philo_num)

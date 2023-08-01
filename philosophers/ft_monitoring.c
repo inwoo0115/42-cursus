@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:54:36 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/01 21:07:35 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/01 22:46:08 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ void	ft_monitoring(t_data *data)
 {
 	int	i;
 
-	pthread_mutex_lock(&(data->sys[THINK]));
-	pthread_mutex_unlock(&(data->sys[THINK]));
+	pthread_mutex_lock(&(data->sys[START]));
+	pthread_mutex_unlock(&(data->sys[START]));
+	usleep(data->t_eat * 500);
 	while (data->death == 0)
 	{
 		i = 0;
@@ -25,7 +26,7 @@ void	ft_monitoring(t_data *data)
 		while (i < data->philo_num)
 		{
 			if (get_time() - data->info[i].last_eat > \
-			(unsigned long)data->t_die)
+			(long long)data->t_die)
 				thread_print(data, DIE, i + 1);
 			i++;
 		}
@@ -35,7 +36,7 @@ void	ft_monitoring(t_data *data)
 	return ;
 }
 
-size_t	get_time(void)
+long long	get_time(void)
 {
 	struct timeval	now;
 

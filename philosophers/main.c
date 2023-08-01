@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:19:26 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/01 19:57:56 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/01 21:33:46 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char *argv[])
 		exit(1);
 	}
 	init_data(argc, argv, &data);
-	data.t_start = get_time();
-	make_thread(&data, -1);
+	make_thread(&data, 0);
 	return (0);
 }

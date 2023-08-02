@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:54:36 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/01 22:46:08 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:27:10 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ void	ft_monitoring(t_data *data)
 {
 	int	i;
 
-	pthread_mutex_lock(&(data->sys[START]));
-	pthread_mutex_unlock(&(data->sys[START]));
-	usleep(data->t_eat * 500);
 	while (data->death == 0)
 	{
 		i = 0;
@@ -31,7 +28,7 @@ void	ft_monitoring(t_data *data)
 			i++;
 		}
 		pthread_mutex_unlock(&(data->sys[EAT]));
-		usleep(50);
+		usleep(100);
 	}
 	return ;
 }

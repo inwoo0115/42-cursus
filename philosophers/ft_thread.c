@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/01 22:40:24 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:27:27 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	thread_function(t_data *data)
 
 	pthread_mutex_lock(&(data->sys[START]));
 	i = get_index(data) + 1;
-	philo_init(data, &(data->info[i - 1]), i);
 	pthread_mutex_unlock(&(data->sys[START]));
 	if (i % 2 == 0)
 	{
@@ -45,7 +44,7 @@ int	ft_eating(t_data *data, int i)
 	pthread_mutex_unlock(&(data->sys[EAT]));
 	thread_print(data, EAT, i);
 	while (get_time() - data->info[i - 1].last_eat < (long long)data->t_eat)
-		usleep(1);
+		usleep(100);
 	pthread_mutex_unlock(&data->fork[data->info[i - 1].first]);
 	pthread_mutex_unlock(&data->fork[data->info[i - 1].second]);
 	data->info[i - 1].eat_time++;
@@ -61,7 +60,7 @@ int	ft_sleeping(t_data *data, int i)
 	thread_print(data, SLEEP, i);
 	now = get_time();
 	while (get_time() - now < (long long)data->t_sleep)
-		usleep(1);
+		usleep(100);
 	return (0);
 }
 

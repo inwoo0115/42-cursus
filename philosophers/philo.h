@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:19:55 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/01 22:18:03 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:24:34 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@
 # include <sys/time.h>
 # include <stdlib.h>
 
-enum e_flag
-{
-	START = 1,
-	FLAG,
-};
-
 enum e_system
 {
 	EAT = 0,
@@ -33,6 +27,8 @@ enum e_system
 	PRINT,
 	FORK,
 	DIE,
+	START = 1,
+	FLAG = 2,
 };
 
 typedef struct s_data
@@ -66,7 +62,7 @@ void		init_data(int argc, char **argv, t_data *data);
 //init
 void		init_data(int argc, char **argv, t_data *data);
 void		init_mutex(t_data *data);
-void		philo_init(t_data *data, t_philo *info, int i);
+void		init_philo(t_data *data, t_philo *info, int i);
 void		make_thread(t_data *data, int i);
 //utils
 int			ft_atoi(const char *str);

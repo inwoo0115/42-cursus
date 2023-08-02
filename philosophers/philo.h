@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:19:55 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/02 16:24:34 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/02 17:05:47 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ enum e_system
 	PRINT,
 	FORK,
 	DIE,
+	EATDONE,
 	START = 1,
 	FLAG = 2,
 };

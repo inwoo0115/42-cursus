@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/02 16:27:27 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/02 17:04:38 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ void	thread_function(t_data *data)
 	}
 	while (data->death == 0)
 	{
-		ft_eating(data, i);
-		ft_sleeping(data, i);
-		ft_thinking(data, i);
+		if (ft_eating(data, i))
+		{
+			ft_sleeping(data, i);
+			ft_thinking(data, i);
+		}
+		else
+			break ;
 	}
 	return ;
 }
@@ -37,19 +41,22 @@ int	ft_eating(t_data *data, int i)
 {
 	pthread_mutex_lock(&data->fork[data->info[i - 1].first]);
 	thread_print(data, FORK, i);
-	pthread_mutex_lock(&data->fork[data->info[i - 1].second]);
-	thread_print(data, FORK, i);
-	pthread_mutex_lock(&(data->sys[EAT]));
-	data->info[i - 1].last_eat = get_time();
-	pthread_mutex_unlock(&(data->sys[EAT]));
-	thread_print(data, EAT, i);
-	while (get_time() - data->info[i - 1].last_eat < (long long)data->t_eat)
-		usleep(100);
+	if (data->philo_num != 1)
+	{
+		pthread_mutex_lock(&data->fork[data->info[i - 1].second]);
+		thread_print(data, FORK, i);
+		pthread_mutex_lock(&(data->sys[EAT]));
+		data->info[i - 1].last_eat = get_time();
+		data->info[i - 1].eat_time++;
+		pthread_mutex_unlock(&(data->sys[EAT]));
+		thread_print(data, EAT, i);
+		while (get_time() - data->info[i - 1].last_eat < (long long)data->t_eat)
+			usleep(100);
+		pthread_mutex_unlock(&data->fork[data->info[i - 1].first]);
+		pthread_mutex_unlock(&data->fork[data->info[i - 1].second]);
+		return (1);
+	}
 	pthread_mutex_unlock(&data->fork[data->info[i - 1].first]);
-	pthread_mutex_unlock(&data->fork[data->info[i - 1].second]);
-	data->info[i - 1].eat_time++;
-	if (data->info[i - 1].eat_time == data->must_eat)
-		data->death = 1;
 	return (0);
 }
 

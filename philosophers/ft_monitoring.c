@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:54:36 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/02 16:27:10 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/02 17:46:47 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,25 @@
 void	ft_monitoring(t_data *data)
 {
 	int	i;
+	int	eat_done;
 
 	while (data->death == 0)
 	{
 		i = 0;
+		eat_done = 0;
 		pthread_mutex_lock(&(data->sys[EAT]));
 		while (i < data->philo_num)
 		{
 			if (get_time() - data->info[i].last_eat > \
 			(long long)data->t_die)
 				thread_print(data, DIE, i + 1);
+			if (data->info[i].eat_time >= data->must_eat \
+			&& data->must_eat != -1)
+				eat_done++;
 			i++;
 		}
+		if (eat_done == data->philo_num)
+			thread_print(data, EATDONE, i);
 		pthread_mutex_unlock(&(data->sys[EAT]));
 		usleep(100);
 	}

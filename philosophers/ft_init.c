@@ -6,21 +6,24 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:21:19 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/02 16:55:57 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/02 19:20:32 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	init_data(int argc, char **argv, t_data *data)
+void	init_data(int argc, char **argv, t_data *data, int i)
 {
-	int	i;
-
-	i = 0;
 	data->philo_num = ft_atoi(argv[1]);
 	data->t_die = ft_atoi(argv[2]);
 	data->t_eat = ft_atoi(argv[3]);
 	data->t_sleep = ft_atoi(argv[4]);
+	if (data->philo_num < 1 || data->t_die < 1 \
+	|| data->t_eat < 1 || data->t_sleep < 1)
+	{
+		write(2, "Not correct argument", 20);
+		exit(1);
+	}
 	if (argc == 6)
 		data->must_eat = ft_atoi(argv[5]);
 	else
@@ -28,14 +31,10 @@ void	init_data(int argc, char **argv, t_data *data)
 	data->death = 0;
 	data->index = (int *)malloc(sizeof(int) * data->philo_num);
 	data->threads = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
-	data->monitoring = (pthread_t)malloc(sizeof(pthread_t));
 	data->info = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
 	data->t_start = get_time();
-	while (i < data->philo_num)
-	{
+	while (++i < data->philo_num)
 		init_philo(data, &(data->info[i]), i);
-		i++;
-	}
 	init_mutex(data);
 }
 

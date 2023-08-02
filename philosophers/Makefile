@@ -6,13 +6,13 @@
 #    By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/09 16:11:41 by wonjilee          #+#    #+#              #
-#    Updated: 2023/08/02 17:46:46 by wonjilee         ###   ########.fr        #
+#    Updated: 2023/08/02 19:20:30 by wonjilee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := philo
 CC = cc
-CFLAG = -Wall -Wextra -Werror #-g -fsanitize=thread
+CFLAG = -Wall -Wextra -Werror #-g -fsanitize=address
 
 SRCS = main.c ft_init.c ft_monitoring.c ft_thread.c utils.c ft_print.c
 

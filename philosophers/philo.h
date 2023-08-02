@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:19:55 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/02 17:05:47 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/02 19:20:17 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,9 @@ typedef struct s_philo
 	long long		last_eat;
 }	t_philo;
 
-//main
-void		init_data(int argc, char **argv, t_data *data);
+void		free_all(t_data *data);
 //init
-void		init_data(int argc, char **argv, t_data *data);
+void		init_data(int argc, char **argv, t_data *data, int i);
 void		init_mutex(t_data *data);
 void		init_philo(t_data *data, t_philo *info, int i);
 void		make_thread(t_data *data, int i);

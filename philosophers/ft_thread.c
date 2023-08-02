@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/02 18:06:12 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/02 19:42:52 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,15 @@ void	thread_function(t_data *data)
 		ft_thinking(data, i);
 		usleep(data->t_eat * 500);
 	}
-	while (data->death == 0)
+	while (1)
 	{
+		pthread_mutex_lock(&data->sys[FLAG]);
+		if (data->death != 0)
+		{
+			pthread_mutex_unlock(&data->sys[FLAG]);
+			break ;
+		}
+		pthread_mutex_unlock(&data->sys[FLAG]);
 		if (ft_eating(data, i))
 		{
 			ft_sleeping(data, i);
@@ -51,7 +58,16 @@ int	ft_eating(t_data *data, int i)
 		pthread_mutex_unlock(&(data->sys[EAT]));
 		thread_print(data, EAT, i);
 		while (get_time() - data->info[i - 1].last_eat < (long long)data->t_eat)
+		{
+			pthread_mutex_lock(&data->sys[FLAG]);
+			if (data->death)
+			{
+				pthread_mutex_unlock(&data->sys[FLAG]);
+				break ;
+			}
+			pthread_mutex_unlock(&data->sys[FLAG]);
 			usleep(100);
+		}
 		pthread_mutex_unlock(&data->fork[data->info[i - 1].first]);
 		pthread_mutex_unlock(&data->fork[data->info[i - 1].second]);
 		return (1);

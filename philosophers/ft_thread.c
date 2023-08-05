@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/02 19:42:52 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/05 20:16:12 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,13 @@ void	thread_function(t_data *data)
 	}
 	while (1)
 	{
-		pthread_mutex_lock(&data->sys[FLAG]);
-		if (data->death != 0)
-		{
-			pthread_mutex_unlock(&data->sys[FLAG]);
+		if (!check_death(data))
 			break ;
-		}
-		pthread_mutex_unlock(&data->sys[FLAG]);
-		if (ft_eating(data, i))
-		{
-			ft_sleeping(data, i);
-			ft_thinking(data, i);
-		}
-		else
+		if (!ft_eating(data, i))
+			break ;
+		if (!ft_sleeping(data, i))
+			break ;
+		if (!ft_thinking(data, i))
 			break ;
 	}
 	return ;
@@ -52,21 +46,11 @@ int	ft_eating(t_data *data, int i)
 	{
 		pthread_mutex_lock(&data->fork[data->info[i - 1].second]);
 		thread_print(data, FORK, i);
-		pthread_mutex_lock(&(data->sys[EAT]));
-		data->info[i - 1].last_eat = get_time();
-		data->info[i - 1].eat_time++;
-		pthread_mutex_unlock(&(data->sys[EAT]));
-		thread_print(data, EAT, i);
-		while (get_time() - data->info[i - 1].last_eat < (long long)data->t_eat)
+		if (!eating_time(data, i))
 		{
-			pthread_mutex_lock(&data->sys[FLAG]);
-			if (data->death)
-			{
-				pthread_mutex_unlock(&data->sys[FLAG]);
-				break ;
-			}
-			pthread_mutex_unlock(&data->sys[FLAG]);
-			usleep(100);
+			pthread_mutex_unlock(&data->fork[data->info[i - 1].first]);
+			pthread_mutex_unlock(&data->fork[data->info[i - 1].second]);
+			return (0);
 		}
 		pthread_mutex_unlock(&data->fork[data->info[i - 1].first]);
 		pthread_mutex_unlock(&data->fork[data->info[i - 1].second]);
@@ -78,34 +62,35 @@ int	ft_eating(t_data *data, int i)
 
 int	ft_sleeping(t_data *data, int i)
 {
-	long long	now;
+	size_t	now;
 
 	thread_print(data, SLEEP, i);
 	now = get_time();
-	while (get_time() - now < (long long)data->t_sleep)
+	while (get_time() - now < (size_t)data->t_sleep)
+	{
+		if (!check_death(data))
+			return (0);
 		usleep(100);
-	return (0);
+	}
+	return (1);
 }
 
 int	ft_thinking(t_data *data, int i)
 {
+	if (!check_death(data))
+		return (0);
 	thread_print(data, THINK, i);
-	return (0);
+	return (1);
 }
 
-int	get_index(t_data *data)
+int	check_death(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (i < data->philo_num)
+	pthread_mutex_lock(&data->sys[FLAG]);
+	if (data->death != 0)
 	{
-		if (data->index[i] == 0)
-		{
-			data->index[i] = 1;
-			return (i);
-		}
-		i++;
+		pthread_mutex_unlock(&data->sys[FLAG]);
+		return (0);
 	}
-	return (-1);
+	pthread_mutex_unlock(&data->sys[FLAG]);
+	return (1);
 }

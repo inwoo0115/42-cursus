@@ -6,11 +6,25 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:21:19 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/02 19:45:13 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/05 20:20:08 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	make_thread(t_data *data, int i)
+{
+	pthread_mutex_lock(&(data->sys[START]));
+	while (i < data->philo_num)
+		pthread_create(&(data->threads[i++]), NULL, \
+		(void *)thread_function, data);
+	pthread_mutex_unlock(&(data->sys[START]));
+	pthread_create(&data->monitoring, NULL, (void *)ft_monitoring, data);
+	i = 0;
+	while (i < data->philo_num)
+		pthread_join((data->threads)[i++], NULL);
+	pthread_join(data->monitoring, NULL);
+}
 
 void	init_data(int argc, char **argv, t_data *data, int i)
 {
@@ -20,10 +34,7 @@ void	init_data(int argc, char **argv, t_data *data, int i)
 	data->t_sleep = ft_atoi(argv[4]);
 	if (data->philo_num < 1 || data->t_die < 1 \
 	|| data->t_eat < 1 || data->t_sleep < 1)
-	{
-		write(2, "Not correct argument", 20);
-		exit(1);
-	}
+		ft_error();
 	if (argc == 6)
 		data->must_eat = ft_atoi(argv[5]);
 	else
@@ -62,18 +73,4 @@ void	init_philo(t_data *data, t_philo *info, int i)
 		info->second = i + 1;
 	info->eat_time = 0;
 	info->last_eat = data->t_start;
-}
-
-void	make_thread(t_data *data, int i)
-{
-	pthread_mutex_lock(&(data->sys[START]));
-	while (i < data->philo_num)
-		pthread_create(&(data->threads[i++]), NULL, \
-		(void *)thread_function, data);
-	pthread_mutex_unlock(&(data->sys[START]));
-	pthread_create(&data->monitoring, NULL, (void *)ft_monitoring, data);
-	i = 0;
-	while (i < data->philo_num)
-		pthread_join((data->threads)[i++], NULL);
-	pthread_join(data->monitoring, NULL);
 }

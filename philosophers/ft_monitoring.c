@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:54:36 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/02 18:02:44 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/05 20:16:11 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_monitoring(t_data *data)
 		while (i < data->philo_num)
 		{
 			if (get_time() - data->info[i].last_eat > \
-			(long long)data->t_die)
+			(size_t)data->t_die)
 				thread_print(data, DIE, i + 1);
 			if (data->info[i].eat_time >= data->must_eat \
 			&& data->must_eat != -1)
@@ -40,7 +40,7 @@ void	ft_monitoring(t_data *data)
 	return ;
 }
 
-long long	get_time(void)
+size_t	get_time(void)
 {
 	struct timeval	now;
 

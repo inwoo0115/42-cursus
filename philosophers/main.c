@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:19:26 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/02 19:22:40 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/05 16:30:44 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ int	main(int argc, char *argv[])
 	t_data			data;
 
 	if (argc < 5 || argc > 6)
-	{
-		write(2, "Not correct argument", 20);
-		exit(1);
-	}
+		ft_error();
 	init_data(argc, argv, &data, -1);
 	make_thread(&data, 0);
 	free_all(&data);
@@ -41,4 +38,10 @@ void	free_all(t_data *data)
 	while (i < 4)
 		pthread_mutex_destroy(&(data->sys)[i++]);
 	free(data->fork);
+}
+
+void	ft_error(void)
+{
+	write(2, "Not correct argument", 20);
+	exit(1);
 }

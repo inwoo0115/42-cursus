@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:19:55 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/05 20:22:21 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/05 20:40:39 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_philo
 //main
 void		ft_error(void);
 void		free_all(t_data *data);
+void		destroy_all(t_data *data);
 //init
 void		init_data(int argc, char **argv, t_data *data, int i);
 void		init_mutex(t_data *data);

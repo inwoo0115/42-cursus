@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:18:33 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/05 20:01:03 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/05 20:22:11 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,13 @@ int	eating_time(t_data *data, int i)
 	data->info[i - 1].eat_time++;
 	pthread_mutex_unlock(&(data->sys[EAT]));
 	return (1);
+}
+
+void	init_index(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->philo_num)
+		data->index[i++] = 0;
 }

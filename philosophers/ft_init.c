@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:21:19 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/05 20:20:08 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/05 20:21:10 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	init_data(int argc, char **argv, t_data *data, int i)
 		data->must_eat = -1;
 	data->death = 0;
 	data->index = (int *)malloc(sizeof(int) * data->philo_num);
+	init_index(data);
 	data->threads = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
 	data->info = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
 	data->t_start = get_time();

@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:21:19 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/05 20:40:36 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:50:06 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,15 @@ void	make_thread(t_data *data, int i)
 {
 	pthread_mutex_lock(&(data->sys[START]));
 	while (i < data->philo_num)
-		pthread_create(&(data->threads[i++]), NULL, \
-		(void *)thread_function, data);
+	{
+		if (pthread_create(&(data->threads[i]), NULL, \
+		(void *)thread_function, data))
+			ft_error_thread(data, i);
+		i++;
+	}
 	pthread_mutex_unlock(&(data->sys[START]));
-	pthread_create(&data->monitoring, NULL, (void *)ft_monitoring, data);
+	if (pthread_create(&data->monitoring, NULL, (void *)ft_monitoring, data))
+		ft_error_thread(data, i);
 	i = 0;
 	while (i < data->philo_num)
 		pthread_join((data->threads)[i++], NULL);
@@ -58,10 +63,16 @@ void	init_mutex(t_data *data)
 	data->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * \
 	data->philo_num);
 	while (i < data->philo_num)
-		pthread_mutex_init(&(data->fork)[i++], NULL);
+	{
+		if (pthread_mutex_init(&(data->fork)[i++], NULL))
+			ft_error_thread(data, -1);
+	}
 	i = 0;
 	while (i < 4)
-		pthread_mutex_init(&(data->sys[i++]), NULL);
+	{
+		if (pthread_mutex_init(&(data->sys[i++]), NULL))
+			ft_error_thread(data, -1);
+	}
 }
 
 void	init_philo(t_data *data, t_philo *info, int i)

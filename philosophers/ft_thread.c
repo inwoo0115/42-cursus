@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:00:58 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/09 14:13:21 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:36:08 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,28 @@ void	thread_function(t_data *data)
 int	ft_eating(t_data *data, int i)
 {
 	pthread_mutex_lock(&data->fork[data->info[i - 1].first]);
+	data->fork_index[data->info[i - 1].first] = 0;
 	thread_print(data, FORK, i);
 	if (data->philo_num != 1)
 	{
 		pthread_mutex_lock(&data->fork[data->info[i - 1].second]);
+		data->fork_index[data->info[i - 1].second] = 0;
 		thread_print(data, FORK, i);
 		if (!eating_time(data, i))
 		{
+			data->fork_index[data->info[i - 1].first] = 1;
 			pthread_mutex_unlock(&data->fork[data->info[i - 1].first]);
+			data->fork_index[data->info[i - 1].second] = 1;
 			pthread_mutex_unlock(&data->fork[data->info[i - 1].second]);
 			return (0);
 		}
+		data->fork_index[data->info[i - 1].first] = 1;
 		pthread_mutex_unlock(&data->fork[data->info[i - 1].first]);
+		data->fork_index[data->info[i - 1].second] = 1;
 		pthread_mutex_unlock(&data->fork[data->info[i - 1].second]);
 		return (1);
 	}
+	data->fork_index[data->info[i - 1].first] = 1;
 	pthread_mutex_unlock(&data->fork[data->info[i - 1].first]);
 	return (0);
 }

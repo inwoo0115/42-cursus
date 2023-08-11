@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:19:55 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/09 13:25:33 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:35:32 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_data
 	int				must_eat;
 	int				death;
 	int				*index;
+	int				*fork_index;
 	struct s_philo	*info;
 	pthread_t		*threads;
 	pthread_t		monitoring;
@@ -78,7 +79,6 @@ void		init_index(t_data *data);
 void		ft_monitoring(t_data *data);
 size_t		get_time(void);
 //thread
-
 void		thread_function(t_data *input);
 int			ft_eating(t_data *data, int i);
 int			ft_sleeping(t_data *data, int i);

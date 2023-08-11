@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:20:57 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/09 13:49:26 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:19:43 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	free_all(t_data *data)
 		free(data->threads);
 	if (data->fork)
 		free(data->fork);
+	if (data->fork_index)
+		free(data->fork_index);
 }
 
 void	destroy_all(t_data *data)

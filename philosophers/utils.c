@@ -6,7 +6,7 @@
 /*   By: wonjilee <wonjilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:18:33 by wonjilee          #+#    #+#             */
-/*   Updated: 2023/08/09 13:17:32 by wonjilee         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:19:18 by wonjilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,8 @@ void	init_index(t_data *data)
 
 	i = 0;
 	while (i < data->philo_num)
+	{
+		data->fork_index[i] = 1;
 		data->index[i++] = 0;
+	}
 }

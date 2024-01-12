@@ -6,7 +6,8 @@ void	HumanB::attack()
 {
 	if (this->armed == NULL)
 		std::cout << "Nothing here" << std::endl;
-	std::cout << this->name << " attacks with their " << this->armed->getType() << std::endl;
+	else
+		std::cout << this->name << " attacks with their " << this->armed->getType() << std::endl;
 }
 
 void	HumanB::setWeapon(Weapon &weapon)

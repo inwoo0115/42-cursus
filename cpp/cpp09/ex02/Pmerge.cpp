@@ -87,7 +87,8 @@ void Pmerge::insertSort(int size, int gap) {
       startIndex = bIndex;
       count++;
     }
-    binaryInsert(startIndex + sortedB, b[bIndex * gap], gap, bIndex, b);
+    std::cout << "Start Index :" << startIndex + sortedB << std::endl;
+    binaryInsert(sortedB + startIndex, b[bIndex * gap], gap, bIndex, b);
     bIndex--;
     sortedNum++;
   }
@@ -101,6 +102,11 @@ void Pmerge::binaryInsert(int range, int num, int gap, int bIndex,
     a.push_back(*it);
     it += gap;
   }
+  std::cout << "AA (vector) : ";
+  for (std::vector<int>::iterator it = a.begin(); it != a.end(); it++) {
+    std::cout << *it << " ";
+  }
+  std::cout << "\n" << std::endl;
   int index = std::lower_bound(a.begin(), a.end(), num) - a.begin();
   v.insert(v.begin() + index * gap, b.begin() + bIndex * gap,
            b.begin() + (bIndex + 1) * gap);

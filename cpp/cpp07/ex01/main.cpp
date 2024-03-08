@@ -5,8 +5,8 @@
 int main() {
   std::string str[] = {"a", "b", "c"};
   int num[] = {1, 2, 3, 4, 5};
-  // const char *strs[2] = {"as", "as"};
-  // iter(strs, 2, strlen);
+  //   const char *strs[2] = {"hello", "nice too meet you"};
+  //   iter(strs, 2, strlen);
   std::cout << "----- Print str -----" << std::endl;
   iter(str, 3, print<std::string>);
   std::cout << "---------------------" << std::endl;

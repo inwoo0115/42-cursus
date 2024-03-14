@@ -4,6 +4,10 @@ Pmerge::~Pmerge(){};
 
 Pmerge::Pmerge(int ac, char **av) : vtime(0), dtime(0) {
   for (int i = 1; i < ac; i++) {
+    if (std::atoi(av[i]) < 1) {
+      std::cout << "Error" << std::endl;
+      exit(1);
+    }
     v.push_back(std::atoi(av[i]));
     d.push_back(std::atoi(av[i]));
   }

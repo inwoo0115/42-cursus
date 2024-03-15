@@ -1,10 +1,10 @@
 CC 		=	c++
 
-CFLAGS 	=	-std=c++98 -Wall -Wextra -Werror
+CFLAGS 	=	-std=c++98 -Wall -Wextra -Werror -g -fsanitize=address
 
-NAME 	=	PmergeMe
+NAME 	=	btc
 
-SRCS	=	main.cpp Pmerge.cpp
+SRCS	=	main.cpp BitcoinExchange.cpp
 
 OBJS 	=	$(SRCS:%.cpp=%.o)
 

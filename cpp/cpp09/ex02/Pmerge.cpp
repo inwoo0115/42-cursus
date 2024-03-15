@@ -34,9 +34,9 @@ void Pmerge::printResult() {
   }
   std::cout << std::endl;
   std::cout << "Time to process a range of " << v.size()
-            << " elements with [std::vector] : " << vtime << " us" << std::endl;
+            << " elements with [std::vector] : " << vtime << " ms" << std::endl;
   std::cout << "Time to process a range of " << d.size()
-            << " elements with [std::deque] : " << dtime << " us " << std::endl;
+            << " elements with [std::deque] : " << dtime << " ms " << std::endl;
 }
 
 void Pmerge::sortVector(int size, int gap) {

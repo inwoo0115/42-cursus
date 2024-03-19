@@ -3,14 +3,23 @@
 Pmerge::~Pmerge(){};
 
 Pmerge::Pmerge(int ac, char **av) : vtime(0), dtime(0) {
+  int value;
   for (int i = 1; i < ac; i++) {
-    if (std::atoi(av[i]) < 1) {
+    std::string str(av[i]);
+    std::istringstream iss(str);
+    iss >> value;
+    if (value < 1 || iss.fail()) {
       std::cout << "Error" << std::endl;
       exit(1);
     }
-    v.push_back(std::atoi(av[i]));
-    d.push_back(std::atoi(av[i]));
+    v.push_back(value);
+    d.push_back(value);
   }
+  std::cout << "Before : ";
+  for (std::vector<int>::iterator it = v.begin(); it != v.end(); it++) {
+    std::cout << *it << " ";
+  }
+  std::cout << std::endl;
 }
 
 void Pmerge::sortPmerge(int ac) {

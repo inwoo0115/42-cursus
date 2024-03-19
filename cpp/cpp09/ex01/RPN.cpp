@@ -12,7 +12,10 @@ void RPN::rpn(std::string av) {
     if (token == "+" || token == "-" || token == "*" || token == "/")
       operation(token);
     else {
-      std::istringstream(token) >> value;
+      std::istringstream iss(token);
+      iss >> value;
+      if (value < -9 || value > 9 || iss.fail())
+        throw std::out_of_range("Error");
       _stack.push(value);
     }
   }
@@ -34,6 +37,5 @@ void RPN::operation(std::string token) {
     _stack.push(value1 * value2);
   } else if (token == "/") {
     _stack.push(value2 / value1);
-  } else
-    throw std::runtime_error("Error");
+  }
 }

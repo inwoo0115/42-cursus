@@ -54,7 +54,7 @@ double BitcoinExchange::checkRate(std::string line) {
   if (d == 0.0 && !std::isdigit(line[0])) return -1;
   if (*ptr && std::strcmp(ptr, "f")) return -1;
   if (d < 0) return -1;
-  return static_cast<double>(d);
+  return (d);
 }
 
 void BitcoinExchange::readInput(const std::string file) {
@@ -95,6 +95,7 @@ void BitcoinExchange::readInput(const std::string file) {
           std::cout << "Error : invalid date" << std::endl;
           continue;
         }
+        if (it == dataMap.end()) --it;
         rate = it->second * value;
       }
       std::cout << dateStr << " => " << valueStr << " = " << rate << std::endl;

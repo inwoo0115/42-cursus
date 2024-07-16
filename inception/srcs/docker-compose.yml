@@ -1,0 +1,75 @@
+version: "3"                                  # Docker Compose 버전
+
+services:                                     # Docker Container 의 서비스 이름 지정
+ mariadb:                                     # Container 이름, 의존성 때문에 mariaDB 먼저 선언
+  build:                                      # Dockerfile 을 통해 image 빌드 
+   context: ./requirements/mariadb/           # 해당 컨테이너의 Dockerfile 경로
+   dockerfile: Dockerfile                     # 해당 컨테이너의 Dockerfile 이름
+  image: mariadb:tag                          # Container 를 빌드할 때 기반으로 할 Docker image 이름 (:tag - mariadb:latest 로 'latest'가 출력되는 것을 방지)
+  container_name: mariadb                     # Container 이름 지정
+  hostname: mariadb
+  pull_policy: never                          # Docker image 를 항상 로컬에서 빌드하고 사용하며 원격 레지스트리에서 이미지를 다운로드하지 않음, 이미지가 로컬에 없는 경우에도 다운로드를 시도하지 않아 에러가 발생할 수 있음(로컬 개발 빛 테스트 환경에 사용)
+  ports:
+   - "3306:3306"
+  env_file:                                   # 환경변수 파일 지정
+   - .env
+  networks:                                   # Docker 네트워크 지정 
+   - inception
+  volumes:                                    # 데이터베이스 파일을 저장할 볼륨(/var/lib/mysql)을 정의하고 이를 컨테이너 내부의 경로와 연결
+   - db-volume:/var/lib/mysql
+  restart: always                             # 컨테이너가 종료되면 항상 다시 시작하도록 설정
+
+ wordpress:
+  depends_on:                                 # 다른 서비스에 대한 의존관계를 정의
+   - mariadb
+  build:
+   context: ./requirements/wordpress/
+   dockerfile: Dockerfile
+  image: wordpress:tag
+  container_name: wordpress
+  pull_policy: never
+  env_file:
+   - .env
+  networks:
+   - inception
+  volumes:
+   - wp-volume:/var/www
+  restart: always
+
+ nginx:
+  depends_on:
+   - mariadb
+   - wordpress
+  build:
+   context: ./requirements/nginx/
+   dockerfile: Dockerfile
+  image: nginx:tag
+  container_name: nginx
+  pull_policy: never
+  env_file:
+   - .env
+  networks:
+   - inception
+  volumes:
+   - wp-volume:/var/www
+  ports:
+   - "443:443"
+  restart: always
+
+networks:
+  inception:
+    driver: bridge
+
+volumes:
+ wp-volume:
+   driver: local
+   driver_opts:
+     o: bind
+     type: none
+     device: /Users/wonjilee/42-cursus/inception/wordpress
+ db-volume:
+   driver: local
+   driver_opts:
+     o: bind
+     type: none
+     device: /Users/wonjilee/42-cursus/inception/mariadb

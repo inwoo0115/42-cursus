@@ -5,21 +5,28 @@ all:
 
 build:
 	mkdir -p /Users/wonjilee/42-cursus/inception/wordpress
-	mkdir -p /Users/wonjilee/42-cursus/inception/wordpress
+	mkdir -p /Users/wonjilee/42-cursus/inception/mariadb
 	docker-compose up --build
 
 down:
-	docker-compose down
+	docker-compose down -v
 
 re: down
 	docker-compose up --build
 
-clean: down
-	docker system prune -a
+clean:
+	docker stop $(docker ps -qa) 2>/dev/null || true
+	docker rm $(docker ps -qa) 2>/dev/null || true
+	docker rmi -f $(docker images -q) 2>/dev/null || true
+	docker volume rm $(docker volume ls -q) 2>/dev/null || true
+	docker network rm $(docker network ls -q) 2>/dev/null || true
 
-fclean:
-	docker-compose down -v
-	docker system prune --all --force --volumes
+fclean: 
+	docker stop $(docker ps -qa) 2>/dev/null || true
+	docker rm $(docker ps -qa) 2>/dev/null || true
+	docker rmi -f $(docker images -q) 2>/dev/null || true
+	docker volume rm $(docker volume ls -q) 2>/dev/null || true
+	docker network rm $(docker network ls -q) 2>/dev/null || true
 	rm -rf /Users/wonjilee/42-cursus/inception/wordpress
 	rm -rf /Users/wonjilee/42-cursus/inception/mariadb
 

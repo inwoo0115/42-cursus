@@ -11,4 +11,5 @@ if [ ! -e "/var/www/html/wp-config.php" ]; then #wordpress 설치여부 확인
 	wp user create $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWORD
 fi
 
+echo "Wordpress started on :9000"
 /usr/sbin/php-fpm81 -F #forground로 실행

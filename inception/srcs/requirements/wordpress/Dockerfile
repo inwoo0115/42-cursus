@@ -4,12 +4,11 @@ RUN apk update && apk upgrade && rm -rf /var/cache/apk/*
 
 RUN apk add --no-cache php81 \
 	php81-fpm \
+	php81-json \
+	php81-mysqli \
 	php81-curl \
 	php81-intl \
-	php81-json \
 	php81-mbstring \
-	php81-mysqli \
-	php81-opcache \
 	php81-xml \
 	php81-zip \
 	php81-phar \

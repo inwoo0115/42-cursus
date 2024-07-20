@@ -7,6 +7,7 @@ services:                                     # Docker Container 의 서비스 �
    dockerfile: Dockerfile                     # 해당 컨테이너의 Dockerfile 이름
   image: mariadb:tag                          # Container 를 빌드할 때 기반으로 할 Docker image 이름 (:tag - mariadb:latest 로 'latest'가 출력되는 것을 방지)
   container_name: mariadb                     # Container 이름 지정
+  pull_policy: never                          # Docker image 를 항상 로컬에서 빌드하고 사용하며 원격 레지스트리에서 이미지를 다운로드하지 않음, 이미지가 로컬에 없는 경우에도 다운로드를 시도하지 않아 에러가 발생할 수 있음(로컬 개발 빛 테스트 환경에 사용)
   ports:
    - "3306:3306"
   env_file:                                   # 환경변수 파일 지정
@@ -25,6 +26,7 @@ services:                                     # Docker Container 의 서비스 �
    dockerfile: Dockerfile
   image: wordpress:tag
   container_name: wordpress
+  pull_policy: never
   env_file:
    - .env
   networks:
@@ -42,6 +44,7 @@ services:                                     # Docker Container 의 서비스 �
    dockerfile: Dockerfile
   image: nginx:tag
   container_name: nginx
+  pull_policy: never
   env_file:
    - .env
   networks:

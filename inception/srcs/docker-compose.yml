@@ -65,10 +65,10 @@ volumes:
    driver_opts:
      o: bind
      type: none
-     device: /Users/wonjilee/42-cursus/inception/wordpress
+     device: /home/wonjilee/data/wordpress
  db-volume:
    driver: local
    driver_opts:
      o: bind
      type: none
-     device: /Users/wonjilee/42-cursus/inception/mariadb
+     device: /home/wonjilee/data/mariadb
